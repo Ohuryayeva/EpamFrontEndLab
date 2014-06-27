@@ -9,19 +9,20 @@
 <div class="md-modal md-effect" id="modal">
     <div class="md-content">
         <h3>Create new task</h3>
-        <a href="#" onclick="showHideModal()"><span>x</span></a>
-        <form>
+        <a href="#" onclick="Modal.showHideModal();Modal.cleanForm()"><span>x</span></a>
+        <div id="modal_scroll">
+        <form id="form_data">
             <ul class="element">
                 <li>
-                <input type="checkbox" name="tDeadline" id="t_deadline" value="Task with deadline" onchange="showHideCat('t_deadline','taskWithDeadline')">
+                <input type="checkbox" name="tDeadline" id="t_deadline" value="Task with deadline" onchange="Modal.showHideCat('t_deadline','taskWithDeadline')">
                 <label for="t_deadline">Task with deadline</label>
                 </li>
                 <li>
-                <input type="checkbox" name="tTime" id="t_time" value="Task with certain time" onchange="showHideCat('t_time','t_certain_t')">
+                <input type="checkbox" name="tTime" id="t_time" value="Task with certain time" onchange="Modal.showHideCat('t_time','t_certain_t')">
                 <label for="t_time">Task with certain time</label><br>
                 </li>
                 <li>
-                    <input type="checkbox" name="tCheckbox" id="t_checkbox" value="Task with checkbox"onchange="showHideCat('t_checkbox','taskWithCheckbox')" >
+                    <input type="checkbox" name="tCheckbox" id="t_checkbox" value="Task with checkbox"onchange="Modal.showHideCat('t_checkbox','taskWithCheckbox')" >
                     <label for="t_checkbox">Task with checkbox</label>
                 </li>
             </ul>
@@ -30,7 +31,7 @@
                     <label for="task_name">Name</label>
                 </div>
                 <div class="data">
-                    <input type="text" name="task_name" id="task_name" required="required">
+                    <input type="text" name="task_name" id="task_name"  onkeyup="removeError(this)" autocomplete="off">
                 </div>
             </div>
             <div class="element">
@@ -67,37 +68,39 @@
                     <label for="task_time">Time to do this</label>
                 </div>
                 <div class="data">
-                    <input type="time" name="task_time" id="task_time">
+                    <input type="time" name="task_time" id="task_time" onkeyup="removeError(this)">
                 </div>
             </div>
             <div class="element" id="taskWithCheckbox">
                 <div class="label">
-                    <label for="task_checkbox">Name of checklabel</label>
+                    <label for="task_checkbox" >Name of checklabel</label>
                 </div>
                 <div class="data">
-                    <input type="text" name="taskCheckbox" id="task_checkbox">
-                    <input type="button" value="Add" onclick="addCheckOption()">
-                    <input type="button" value="Delete" onclick="delCheckOption()">
+                    <input type="text" name="taskCheckbox" id="task_checkbox" onkeyup="removeError(this)">
+                    <input type="button" value="Add" onclick="Modal.addCheckOption()">
+                    <input type="button" value="Delete" onclick="Modal.delCheckOption()">
                     <ul id="ulCheckbox">
                     </ul>
                 </div>
             </div>
             <div>
                 <input type="button" id="create" value="Create" onclick="addTask()">
+                <input type="submit" id="show_message" style="display: none">
             </div>
         </form>
-
+        </div>
     </div>
 </div>
 
 
-<button class="md-trigger" data-modal="modal" onclick="showHideModal()">Add new task</button>
+<button class="md-trigger" data-modal="modal" onclick="Modal.showHideModal()">Add new task</button>
 
 
 
 <div class="md-overlay"></div>
 <ul id="planned" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
 <ul id="started" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
+<script src="js/modal.js"></script>
 <script src="js/couch.js"></script>
 <script src="js/script.js"></script>
 </body>

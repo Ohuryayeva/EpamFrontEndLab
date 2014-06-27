@@ -4,107 +4,57 @@ var CONTEXT = {
     intervalIds:{},
     auth_token: ''
 }
-/*Operation with modal window*/
-function showHideModal(){
-    var modal_window = document.getElementById("modal");
-    modal_window.classList.toggle("md-show");
+
+function removeError(input){
+    input.setCustomValidity("");
+}
+function showErrorMessage(input, message){
+    input.setCustomValidity(message);
+    document.getElementById("show_message").click();
 }
 
-function showHideCat(checkboxId, categoryId){
-    var checkbox = document.getElementById(checkboxId);
-    var category = document.getElementById(categoryId);
-    if(checkbox.checked){
-        category.style.display = "block";
+/*Add,save in db and paint new issue*/
+function addTask(){
+    var task = Modal.getTaskFromModal();
+    task = Couch.createTask(task);
+    Modal.displayTask(task);
+    Modal.cleanForm();
+    Modal.showHideModal();
+
+}
+
+function validationForm(){
+    if ((checkTaskName() && checkTaskTime()) == true){
+        return true;
     } else{
-        category.style.display = "none";
+        return false;
     }
 }
-
-function addCheckOption(){
-    var ul_checkbox = document.getElementById("ulCheckbox");
-    var li_checkbox = document.createElement("li");
+function checkTaskName(){
+    var task_name = document.getElementById("task_name").value;
+    if(task_name.length < 3){
+        showErrorMessage(document.getElementById("task_name"), "More than 3 letters")
+        return false;
+    } else{
+        return true;
+    }
+}
+function checkCheckOption(){
     var check_option= document.getElementById("task_checkbox").value;
     if(check_option == ""){
-        alert("You should enter your option");
-        return;
-    } else {
-        var input_option = document.createElement("input");
-        input_option.setAttribute("type","checkbox");
-        input_option.setAttribute("id",check_option);
-        input_option.setAttribute("name",check_option);
-        var checkbox_label = document.createElement('label');
-        ul_checkbox.appendChild(li_checkbox);
-        li_checkbox.appendChild(input_option);
-        li_checkbox.appendChild(checkbox_label);
-        checkbox_label.innerHTML = check_option;
-        checkbox_label.setAttribute("for",check_option);
-        document.getElementById("task_checkbox").value = "";
+        showErrorMessage(document.getElementById("task_checkbox"), "Empty option is not allowed")
+        return false;
+    } else{
+        return true;
     }
 }
-
-function delCheckOption(){
-    var ul_checkbox = document.getElementById("ulCheckbox");
-    var input_options = ul_checkbox.getElementsByTagName("input");
-    input_options = Array.prototype.slice.call(input_options);//converts array to allow forEach method
-    input_options.forEach(function(input_option){
-        if(input_option.checked == true){
-            var parent_li = input_option.parentElement;
-            parent_li.parentNode.removeChild(parent_li);
-        }
-    });
-
-}
-
-/*Add,save in db and repaint new issue*/
-function addTask(){
-    var task_name = document.getElementById("task_name").value;
-    var task_desc = document.getElementById("task_desc").value;
-    var task = {name: task_name,description: task_desc, status: "planned" };
-    var t_deadline = document.getElementById("t_deadline");
-    var t_time = document.getElementById("t_time");
-    var t_checkbox = document.getElementById("t_checkbox");
-    task.last_change = new Date().getTime(); // change format date to milliseconds
-    if(t_deadline.checked){
-        var task_deadline = document.getElementById("task_deadline").value;
-        task.deadline = task_deadline;
+function checkTaskTime(){
+    var task_time = document.getElementById("task_time").value;
+    var time_check =/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+    if(time_check.test(task_time) == false){
+        showErrorMessage(document.getElementById("task_time"), "You should write only numbers from 0 to 60")
     }
-    if(t_time.checked){
-        var task_time = document.getElementById("task_time").value;
-        task.time = task_time;
-    }
-    if  (t_checkbox.checked){
-        var ul_checkbox = document.getElementById("ulCheckbox");
-        var label = ul_checkbox.getElementsByTagName("label");
-        var check_array=[];
-        for (var i =0; i <label.length;i++){
-            var checkbox = {name:label[i].innerHTML, done:false}
-            check_array.push(checkbox);
-        }
-        task.checkbox = check_array;
-    }
-    showHideModal();
-    task = Couch.createTask(task);
-    displayTask(task);
-}
-
-function displayTasks() {
-    var data_array = Couch.getTasks();
-    data_array.forEach(function (task) {
-        displayTask(task);
-    })
-}
-function displayTask(task){
-    var ul_target = document.getElementById(task.status);
-    var li_issue = document.createElement("li");
-    var div_issue = document.createElement("div");
-    li_issue.setAttribute("draggable","true");
-    li_issue.addEventListener("dragstart",drag,false);
-    li_issue.setAttribute("id", task._id);
-    ul_target.appendChild(li_issue);
-    li_issue.appendChild(div_issue);
-    div_issue.innerHTML =task.time;
-   /* countdown(task);*/
-    countdownSpecial(task);
+    return time_check.test(task_time);
 }
 
 function observeTime(task_id, countdown_time) {
@@ -144,7 +94,7 @@ function observeTime(task_id, countdown_time) {
 }
 
 Couch.getTasks();
-displayTasks();
+Modal.displayTasks();
 
 
 function allowDrop(ev)

@@ -83,6 +83,10 @@ ul#finished{
     -moz-box-shadow:    4px 2px 5px 0px rgba(0, 0, 0, 0.79);
     box-shadow:         4px 2px 5px 0px rgba(0, 0, 0, 0.79);
 }
+.md-content  #modal_scroll{
+    overflow: auto;
+    max-height: 300px;
+}
 
 .md-content h3 {
     position: relative;
@@ -116,7 +120,7 @@ ul#finished{
     width: 69%;
     vertical-align: top;
 }
-.md-content > div {
+.md-content > div > div {
     padding: 15px 40px 30px;
     margin: 0;
     font-weight: 300;
@@ -159,9 +163,11 @@ ul#finished{
     color: #ffffff;
     border: none;
     padding: 3px 20px;
+    outline: 0;
 }
 .md-content input[type="button"]:hover{
-    background-color: blue;
+    background-color: #00749e;
+    outline: 0;
     cursor: pointer;
 }
 

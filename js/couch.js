@@ -70,6 +70,13 @@ var Couch = {
         var xhr = new XMLHttpRequest();
         xhr.open('PUT', '/couch/' + db +'/'+ task_id, false);
         xhr.send(JSON.stringify(task));
+    },
+    deleteTask: function(task){
+        var li_element = document.getElementById(task._id)
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', '/couch/' + db +'/'+ task_id, false);
+        xhr.send(JSON.stringify(task));
     }
 }
+
 
