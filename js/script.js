@@ -15,6 +15,9 @@ function showErrorMessage(input, message){
 
 /*Add,save in db and paint new issue*/
 function addTask(){
+    if (validationForm() != true){
+        return;
+    }
     var task = Modal.getTaskFromModal();
     task = Couch.createTask(task);
     Modal.displayTask(task);
@@ -24,11 +27,7 @@ function addTask(){
 }
 
 function validationForm(){
-    if ((checkTaskName() && checkTaskTime()) == true){
-        return true;
-    } else{
-        return false;
-    }
+    return checkTaskName() && checkTaskTime();
 }
 function checkTaskName(){
     var task_name = document.getElementById("task_name").value;
@@ -49,12 +48,17 @@ function checkCheckOption(){
     }
 }
 function checkTaskTime(){
-    var task_time = document.getElementById("task_time").value;
-    var time_check =/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
-    if(time_check.test(task_time) == false){
-        showErrorMessage(document.getElementById("task_time"), "You should write only numbers from 0 to 60")
+    var task_time_element = document.getElementById("task_time");
+    if (document.getElementById("t_certain_t").style.display == 'block'){
+        var task_time = task_time_element.value;
+        var time_check = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+        if (time_check.test(task_time) == false) {
+            showErrorMessage(task_time_element, "You should write only numbers from 0 to 60")
+        }
+        return time_check.test(task_time);
+    } else {
+        return true;
     }
-    return time_check.test(task_time);
 }
 
 function observeTime(task_id, countdown_time) {
@@ -161,4 +165,26 @@ function countdownSpecial(task){
             observeTime(task._id, new_time1);
         }
     }
+}
+
+function observeTimeDeadline(task){
+    var intervalId = setInterval(function(){
+        var li_element = document.getElementById(task._id);
+        var element_deadline = li_element.childNodes[0];
+        var task_date = new Date(task.deadline);
+
+        var diff_ms = task_date.getTime() - new Date().getTime();
+        if (diff_ms < 0){
+            clearInterval(intervalID);
+            console.log("time is finished");
+        }
+        var diff = new Date(diff_ms);
+        element_deadline.innerHTML = "To deadline " + (diff.getUTCDate()-1) + "d "+ diff.getUTCHours() + "h " + diff.getUTCMinutes() + "m " + diff.getUTCSeconds() + "s ";
+        console.log("Years : " + (diff.getUTCFullYear() - 1970));
+        console.log("Monthes : " + diff.getUTCMonth());
+        console.log("Days : " + (diff.getUTCDate()-1));
+        console.log("Hours : " + diff.getUTCHours());
+        console.log("Minutes : " + diff.getUTCMinutes());
+        console.log("Seconds : " + diff.getUTCSeconds());
+    },1000)
 }

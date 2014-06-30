@@ -55,10 +55,12 @@ var Modal = {
         if(t_deadline.checked){
             var task_deadline = document.getElementById("task_deadline").value;
             task.deadline = task_deadline;
+            var task_date = new Date(task_deadline)
         }
         if(t_time.checked){
             var task_time = document.getElementById("task_time").value;
             task.time = task_time;
+
         }
         if  (t_checkbox.checked){
             var ul_checkbox = document.getElementById("ulCheckbox");
@@ -82,7 +84,9 @@ var Modal = {
         ul_target.appendChild(li_issue);
         li_issue.appendChild(div_issue);
         div_issue.innerHTML =task.deadline;
-        /* countdown(task);*/
+        if(task.deadline != "undefined"){
+            observeTimeDeadline(task);
+        }
         countdownSpecial(task);
     },
     displayTasks: function () {
@@ -100,8 +104,8 @@ var Modal = {
         t_deadline.checked =false;
         t_time.checked = false;
         t_checkbox.checked = false;
-        showHideCat('t_deadline','taskWithDeadline');
-        showHideCat('t_time','t_certain_t');
-        showHideCat('t_checkbox','taskWithCheckbox');
+        this.showHideCat('t_deadline','taskWithDeadline');
+        Modal.showHideCat('t_time','t_certain_t');
+        this.showHideCat('t_checkbox','taskWithCheckbox');
     }
 }
