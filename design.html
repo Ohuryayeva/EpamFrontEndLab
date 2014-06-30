@@ -1,0 +1,121 @@
+<html>
+<head>
+    <title>todo</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style_drag.css">
+
+</head>
+<body>
+<div id="menu"></div>
+<a href="" class="button add">Add</a>
+
+<div id="addButton"></div>
+
+<ul id="header">
+    <li class="header-name">In Plan</li>
+    <li class="header-name">In process</li>
+    <li class="header-name">Done</li>
+</ul>
+
+<ul class="stickies left" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+    <li class="sticky" id="11" draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title11</h2>
+
+        <p>Group options are shared between all member containers.</p> <input type="checkbox">1 item<br><input type="checkbox">2 item<br><input
+                type="checkbox">3 item<br><input type="checkbox">4 item<br><h5 id="toDead">12:12:12</h5><h5 id="timePast">12:12:12</h5>
+    </li>
+    <li class="sticky"  id="12"draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title12</h2>
+
+        <p>Group optio.</p><h5>12:12:12</h5></li>
+    <li class="sticky"  id="13"draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title13</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+    <li  class="sticky" id="14"draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title14</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+    <li class="sticky" id="15"draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title15</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+
+</ul>
+
+<ul class="stickies CENTER" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+
+    <li class="sticky" id="22"draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title22</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+    <li class="sticky" id="23"draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title23</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+    <li class="sticky" id="24"draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title24</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+    <li class="sticky" id="25"draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title25</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+
+</ul>
+
+<ul class="stickies RIGHT" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+    <li class="sticky" id="31" draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title31</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+    <li class="sticky" id="32" draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title33</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+    <li class="sticky" id="33" draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title34</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+    <li class="sticky" id="34" draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title35</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+    <li class="sticky"  id="35" draggable="true" ondragstart="drag(event)">
+        <div class="delete">&#x2718;</div>
+        <h2>title36</h2>
+
+        <p>Group options are shared between all member containers and are set on the first instantiation of a member
+            container.</p><h5>12:12:12</h5></li>
+</ul>
+
+</body>
+<script src="drag.js"></script>
+</html>
