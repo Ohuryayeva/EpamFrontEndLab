@@ -23,11 +23,11 @@ function addTask(){
     Modal.displayTask(task);
     Modal.cleanForm();
     Modal.showHideModal();
-
+    var deadLine = new Date(Date.parse('2014-07-26T21:11'));
 }
 
 function validationForm(){
-    return checkTaskName() && checkTaskTime();
+    return checkTaskName() && checkTaskTime() && checkDeadline();
 }
 function checkTaskName(){
     var task_name = document.getElementById("task_name").value;
@@ -56,6 +56,20 @@ function checkTaskTime(){
             showErrorMessage(task_time_element, "You should write only numbers from 0 to 60")
         }
         return time_check.test(task_time);
+    } else {
+        return true;
+    }
+}
+function checkDeadline() {
+    var deadline = document.getElementById("task_deadline");
+    if(document.getElementById("taskWithDeadline").style.display == 'block')
+    {
+        var deadline_time = deadline.value;
+        var deadline_check = Modal.deadline_regex;
+        if (deadline_check.test(deadline) == false) {
+            showErrorMessage(deadline, "Write date in right format")
+        }
+        return deadline_check.test(deadline);
     } else {
         return true;
     }
@@ -135,8 +149,17 @@ function countdownSpecial(task){
 
 function observeTimeDeadline(task){
     var intervalId = setInterval(function(){
+        var time_to_deadline;
         var li_element = document.getElementById(task._id);
-        var element_deadline = li_element.childNodes[0];
+        var elements = li_element.getElementsByClassName("deadline");
+        var deadline_element;
+        if (elements.length == 0){
+            deadline_element = document.createElement("div");
+            deadline_element.classList.add('deadline');
+            li_element.appendChild(deadline_element);
+        } else {
+            deadline_element = elements[0];
+        }
         var task_date = new Date(task.deadline);
 
         var diff_ms = task_date.getTime() - new Date().getTime();
@@ -145,12 +168,7 @@ function observeTimeDeadline(task){
             console.log("time is finished");
         }
         var diff = new Date(diff_ms);
-        element_deadline.innerHTML = "To deadline " + (diff.getUTCDate()-1) + "d "+ diff.getUTCHours() + "h " + diff.getUTCMinutes() + "m " + diff.getUTCSeconds() + "s ";
-        console.log("Years : " + (diff.getUTCFullYear() - 1970));
-        console.log("Monthes : " + diff.getUTCMonth());
-        console.log("Days : " + (diff.getUTCDate()-1));
-        console.log("Hours : " + diff.getUTCHours());
-        console.log("Minutes : " + diff.getUTCMinutes());
-        console.log("Seconds : " + diff.getUTCSeconds());
+        time_to_deadline = "To deadline " + (diff.getUTCDate()-1) + "d "+ diff.getUTCHours() + "h " + diff.getUTCMinutes() + "m " + diff.getUTCSeconds() + "s ";
+        deadline_element.innerHTML = time_to_deadline;
     },1000)
 }

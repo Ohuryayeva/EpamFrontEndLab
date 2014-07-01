@@ -1,8 +1,8 @@
-const couchUrl = "epam-tasks-app.iriscouch.com";
-const couchPort = 80;
+//const couchUrl = "epam-tasks-app.iriscouch.com";
+//const couchPort = 80;
 const authorization = "Basic Y291Y2g6Y291Y2g=";
-//const couchUrl = "localhost";
-//const couchPort = 5984;
+const couchUrl = "localhost";
+const couchPort = 5984;
 
 
 var http = require('http');
