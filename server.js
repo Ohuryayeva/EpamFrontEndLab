@@ -4,7 +4,6 @@ const authorization = "Basic Y291Y2g6Y291Y2g=";
 const couchUrl = "localhost";
 const couchPort = 5984;
 
-
 var http = require('http');
 var fs = require('fs');
 var mime = require('mime');
