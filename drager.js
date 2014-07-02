@@ -1,52 +1,50 @@
- var Task = function(name) {
-            this.name = ko.observable(name);
-        };
 
-        Task.prototype.clone = function() {
-            return new Task(this.name());
-        };
+function text(){
+ document.getElementById('input').style.display = "block";
+}
 
-        var ViewModel = function() {
-            var self = this;
-            self.tasks = ko.observableArray([
-                new Task("Work"),
-                new Task("Shopping"),
-                new Task("Home")
-            ]);
 
-            self.newTask = new Task("New Task");
 
-            self.allowNewTask = ko.computed(function() {
-               return self.tasks().length < 10;
-            });
+function myFunction(){
+var parent =document.getElementById("category");
+var categoryName = document.getElementById('input').value;
 
-            self.selectedTask = ko.observable();
+if (categoryName=="") { categoryName="New Category";
+}   
 
-            self.clearTask = function(data, event) {
-                if (data === self.selectedTask()) {
-                    self.selectedTask(null);
-                }
+var newCategory = document.createElement('li');
 
-                if (data.name() === "") {
-                   self.tasks.remove(data);
-                }
-            };
+newCategory.className="stick";
+var id = document.getElementById("category").childElementCount+1;
+newCategory.id= id;
+newCategory.setAttribute("draggable","true");
+newCategory.setAttribute("ondragstart","drag(event)");
 
-            self.isTaskSelected = function(task) {
-               return task === self.selectedTask();
-            };
-        };
+var newB = document.createElement('button');
+newB.className="delet";
+newB.innerHTML = newB.innerHTML + '&#x2718;';
+newB.setAttribute("onclick","delet("+id+")")
+newCategory.appendChild(newB);
 
-  
-        ko.bindingHandlers.visibleAndSelect = {
-            update: function(element, valueAccessor) {
-                ko.bindingHandlers.visible.update(element, valueAccessor);
-                if (valueAccessor()) {
-                    setTimeout(function() {
-                        $(element).find("input").focus().select();
-                    }, 0);
-                }
-            }
-        };
+var newH = document.createElement('h2');
+newH.innerHTML = categoryName;
+newCategory.appendChild(newH);
+parent.appendChild(newCategory);
+document.getElementById('input').style.display = "none";
+document.getElementById('input').value="";
 
-        ko.applyBindings(new ViewModel());
+
+}
+
+function onEnter(){
+	if (event.keyCode == 13) 
+	{
+	  myFunction();
+	}
+}
+
+function delet(num){
+var element = document.getElementById(num);
+element.parentNode.removeChild(element);
+ return false;
+}
