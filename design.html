@@ -4,10 +4,33 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="style_drag.css">
+    <link rel="stylesheet" href="style_drager.css">
 
 </head>
 <body>
-<div id="menu"></div>
+
+<ul id="category" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+	 <div>
+    	<input type="text" id="input" style="display:none;" onkeydown="onEnter()">
+    	<button id="Add" onclick="text()"  >Add category</button>
+     </div>
+
+    <li class="stick" id="1" draggable="true" ondragstart="drag(event)">
+			<button class="delet" onclick="delet(1)">&#x2718;</button>
+        <h2>Shop</h2>
+
+       </li>
+    <li class="stick"  id="2"draggable="true" ondragstart="drag(event)">
+			<button class="delet" onclick="delet(2)">&#x2718;</button>
+        <h2>Work</h2>
+
+    <li class="stick"  id="3"draggable="true" ondragstart="drag(event)">
+			<button class="delet" onclick="delet(3)">&#x2718;</button>
+        <h2>Home</h2>
+</ul>
+
+
 <a href="javascript:void(0)" class="button add" data-modal="modal" onclick="Modal.showHideModal()">Add</a>
 
 <div data-modal="modal" class="md-modal md-effect" id="modal">
@@ -117,6 +140,7 @@
 <ul id="finished" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
 
 </body>
+<script src="drager.js"></script>
 <script src="drag.js"></script>
 <script src="js/modal.js"></script>
 <script src="js/couch.js"></script>
