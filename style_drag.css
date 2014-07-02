@@ -83,7 +83,9 @@ ul .sticky:nth-child(5n) {
     position: relative;
     top: -10px;
 }
-
+li.sticky > div{
+    margin-bottom: 10px;
+}
 #planned > li {
     background: #ffc;
 }
@@ -92,7 +94,7 @@ ul .sticky:nth-child(5n) {
     background: #cfc;
 }
 
-.right > li {
+#finished > li {
     background: #ccf;
 }
 

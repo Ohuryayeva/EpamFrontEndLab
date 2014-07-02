@@ -42,8 +42,8 @@ function drop(ev) {
     } else {
         ul_target.insertBefore(document.getElementById(task_id), li_element)
     }
- var task = Couch.getTask(task_id);
- task.status = ul_target.id;
-
- Couch.updateTask(task);
+    var task = Couch.getTask(task_id);
+    task.status = ul_target.id;
+    Couch.updateTask(task);
+    observeTime(task);
 }

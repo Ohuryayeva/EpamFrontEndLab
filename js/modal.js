@@ -1,5 +1,6 @@
 var Modal = {
-    deadline_regex : /^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}\s([0-1][0-9]|2[0-3])\:[0-5][0-9]$/,
+    deadline_regex_manual : /^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}\s([0-1][0-9]|2[0-3])\:[0-5][0-9]$/,
+    deadline_regex_input : /^([0-9]{4})\-(0[1-9]|1[0-2])\-(0[1-9]|[1-2][0-9]|3[0-1])T([0-1][0-9]|2[0-3])\:[0-5][0-9]$/,
     showHideModal: function (){
         var modal_window = document.getElementById("modal");
         modal_window.classList.toggle("md-show");
@@ -35,7 +36,16 @@ var Modal = {
         task.last_change = new Date().getTime(); // change format date to milliseconds
         if(t_deadline.checked){
             var task_deadline = document.getElementById("task_deadline").value;
-            task.deadline = task_deadline;
+            if (this.deadline_regex_manual.test(task_deadline)){
+                var parts = task_deadline.split('.');
+                var day = parts[0];
+                var month = parts[1];
+                var year = parts[2].split(" ")[0];
+                var time = parts[2].split(" ")[1];
+                task.deadline = year + "-"+ month + "-"+ day + "T"+ time;
+            } else {
+                task.deadline = task_deadline;
+            }
         }
         if(t_time.checked){
             var task_time = document.getElementById("task_time").value;
@@ -55,25 +65,17 @@ var Modal = {
         return task;
     },
     formatDate: function (date) {
-        var result_date;
-        if (Modal.deadline_regex.test(date)){
-            var parts = date.split('.');
-            parts = [parts[1], parts[0], parts[2]];
-            result_date = new Date(parts.join('.') + " GTM+0000")
-        } else {
-            result_date = new Date(date);
-        }
-        var result = Modal.addZero(result_date.getUTCDate()) + "."
-            + Modal.addZero(result_date.getUTCMonth()) + "."
+        var result_date = new Date(date);
+        var result = this.addZero(result_date.getUTCDate()) + "."
+            + this.addZero(result_date.getUTCMonth()) + "."
             + result_date.getUTCFullYear() + " "
-            + Modal.addZero(result_date.getUTCHours()) + ":"
-            + Modal.addZero(result_date.getUTCMinutes());
+            + this.addZero(result_date.getUTCHours()) + ":"
+            + this.addZero(result_date.getUTCMinutes());
 
         return result;
     },
     displayTask: function(task){
         var ul_target = document.getElementById(task.status);
-
         var sticky_li = document.createElement("li");
         sticky_li.className ="sticky";
         sticky_li.setAttribute("id", task._id);
@@ -93,9 +95,10 @@ var Modal = {
         }
         if(task_timeV != undefined){
             var task_time = document.createElement("h4");
+            task_time.classList.add("time");
             task_time.innerHTML = task.time;
             sticky_li.appendChild(task_time);
-        /*    countdownSpecial(task);*/
+            observeTime(task);
         }
         if(task_deadlineV != undefined){
             var task_deadline = document.createElement("h5");
@@ -105,15 +108,21 @@ var Modal = {
         }
         if(task.checkbox != undefined){
             var ul_checkbox = document.createElement("ul");
-            var li_checkbox = document.createElement("li");
             sticky_li.appendChild(ul_checkbox);
             for(var i=0; i< task.checkbox.length; i++){
                 var check_option = task.checkbox[i].name;
-                Modal.displayCheckBox(check_option, ul_checkbox, li_checkbox);
+                this.displayCheckBox(check_option, ul_checkbox);
             }
         }
     },
-    displayCheckBox: function (check_option, ul_checkbox, li_checkbox) {
+    displayTasks: function () {
+        var data_array = Couch.getTasks();
+        data_array.forEach(function (task) {
+            Modal.displayTask(task);
+        })
+    },
+    displayCheckBox: function (check_option, ul_checkbox) {
+        var li_checkbox = document.createElement("li");
         var input_option = document.createElement("input");
         input_option.setAttribute("type", "checkbox");
         input_option.setAttribute("id", check_option);
@@ -127,32 +136,14 @@ var Modal = {
     },
     addCheckOption: function (){
         var ul_checkbox = document.getElementById("ulCheckbox");
-        var li_checkbox = document.createElement("li");
         var check_option= document.getElementById("task_checkbox").value;
-        if (checkCheckOption() !== true){
+        if (TaskValidation.checkCheckOption() !== true){
             return;
         }
         else {
-            Modal.displayCheckBox(check_option, ul_checkbox, li_checkbox);
+            this.displayCheckBox(check_option, ul_checkbox);
             document.getElementById("task_checkbox").value = "";
         }
-    },
-
-    /*    var ul_target = document.getElementById(task.status);
-        var li_issue = document.createElement("li");
-        var div_issue = document.createElement("div");
-        li_issue.setAttribute("draggable","true");
-        li_issue.addEventListener("dragstart",drag,false);
-        li_issue.setAttribute("id", task._id);
-        ul_target.appendChild(li_issue);
-        li_issue.appendChild(div_issue);
-        div_issue.innerHTML =task.deadline;*/
-
-    displayTasks: function () {
-        var data_array = Couch.getTasks();
-        data_array.forEach(function (task) {
-            Modal.displayTask(task);
-        })
     },
     cleanForm: function (){
         document.getElementById("task_name").value ="";
@@ -163,9 +154,9 @@ var Modal = {
         t_deadline.checked =false;
         t_time.checked = false;
         t_checkbox.checked = false;
-        Modal.showHideCat('t_deadline','taskWithDeadline');
-        Modal.showHideCat('t_time','t_certain_t');
-        Modal.showHideCat('t_checkbox','taskWithCheckbox');
+        this.showHideCat('t_deadline','taskWithDeadline');
+        this.showHideCat('t_time','t_certain_t');
+        this.showHideCat('t_checkbox','taskWithCheckbox');
     },
     addZero: function(number){
         if (typeof number == "string"){
@@ -178,5 +169,15 @@ var Modal = {
             result = number;
         }
         return result;
+    },
+    addNewTask: function (){
+        if (TaskValidation.validationForm() != true){
+            return;
+        }
+        var task = this.getTaskFromModal();
+        task = Couch.createTask(task);
+        this.displayTask(task);
+        this.cleanForm();
+        this.showHideModal();
     }
 }

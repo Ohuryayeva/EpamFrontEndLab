@@ -63,10 +63,13 @@ var Couch = {
     updateTask: function(task){
         var last_change = new Date().getTime();
         var li_time = document.getElementById(task._id);
-        var task_time = li_time.childNodes[0].innerHTML;
+        var elements_time = li_time.getElementsByClassName("time");
+        if (elements_time.length > 0){
+            var task_time = elements_time[0].innerHTML;
+            task.time = task_time;
+        }
         var task_id = task._id;
         task.last_change = last_change;
-        task.time = task_time;
         var xhr = new XMLHttpRequest();
         xhr.open('PUT', '/couch/' + db +'/'+ task_id, false);
         xhr.send(JSON.stringify(task));

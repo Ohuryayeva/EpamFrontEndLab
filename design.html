@@ -58,7 +58,7 @@
                         <label for="task_name">Name</label>
                     </div>
                     <div class="data">
-                        <input type="text" name="task_name" id="task_name"  onkeyup="removeError(this)" autocomplete="off">
+                        <input type="text" name="task_name" id="task_name"  onkeyup="TaskValidation.removeError(this)" autocomplete="off">
                     </div>
                 </div>
                 <div class="element">
@@ -84,10 +84,10 @@
                 </div>
                 <div class="element" id="taskWithDeadline">
                     <div class="label">
-                        <label for="task_deadline">Deadline</label>
+                        <label for="task_deadline">Deadline ("dd.mm.yyyy hh:mm")</label>
                     </div>
                     <div class="data">
-                        <input type="datetime-local" name="task_deadline" id="task_deadline">
+                        <input type="datetime-local" name="task_deadline" id="task_deadline" onkeyup="TaskValidation.removeError(this)">
                     </div>
                 </div>
                 <div class="element" id="t_certain_t">
@@ -95,7 +95,7 @@
                         <label for="task_time">Time to do this</label>
                     </div>
                     <div class="data">
-                        <input type="time" name="task_time" id="task_time" onkeyup="removeError(this)">
+                        <input type="time" name="task_time" id="task_time" onkeyup="TaskValidation.removeError(this)">
                     </div>
                 </div>
                 <div class="element" id="taskWithCheckbox">
@@ -103,7 +103,7 @@
                         <label for="task_checkbox" >Name of checklabel</label>
                     </div>
                     <div class="data">
-                        <input type="text" name="taskCheckbox" id="task_checkbox" onkeyup="removeError(this)">
+                        <input type="text" name="taskCheckbox" id="task_checkbox" onkeyup="TaskValidation.removeError(this)">
                         <input type="button" value="Add" onclick="Modal.addCheckOption()">
                         <input type="button" value="Delete" onclick="Modal.delCheckOption()">
                         <ul id="ulCheckbox">
@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <div>
-                    <input type="button" id="create" value="Create" onclick="addTask()">
+                    <input type="button" id="create" value="Create" onclick="Modal.addNewTask()">
                     <input type="submit" id="show_message" style="display: none">
                 </div>
             </form>
@@ -142,6 +142,7 @@
 </body>
 <script src="drager.js"></script>
 <script src="drag.js"></script>
+<script src="js/taskValidation.js"></script>
 <script src="js/modal.js"></script>
 <script src="js/couch.js"></script>
 <script src="js/script.js"></script>
