@@ -11,6 +11,7 @@ var TaskValidation = {
             return true;
         }
     },
+
     checkCheckOption: function (){
         var check_option= document.getElementById("task_checkbox").value;
         if(check_option == ""){

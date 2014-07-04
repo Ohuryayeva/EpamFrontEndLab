@@ -9,7 +9,7 @@ function init(){
     CONTEXT.category = configuration.categories[0];
     Modal.displayTasks(CONTEXT.category);
     displayCategories(configuration.categories);
-    Modal.displayCategoriesForm(configuration.categories);
+
 }
 var Time = {
     countdownTime: function(task, countdown_time) {

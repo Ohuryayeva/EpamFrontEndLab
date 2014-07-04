@@ -26,14 +26,6 @@ var Modal = {
             }
         })
     },
-    displayCategoriesForm: function(categories){
-        var select_categories = document.getElementById("sel_cat");
-        for (var i=0; i<categories.length; i++){
-            var opt_category = document.createElement("option");
-            select_categories.appendChild(opt_category);
-            opt_category.innerHTML = categories[i];
-        }
-    },
     getTaskFromModal: function(){
         var task_name = document.getElementById("task_name").value;
         var task_desc = document.getElementById("task_desc").value;
