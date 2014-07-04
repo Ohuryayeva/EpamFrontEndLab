@@ -26,6 +26,14 @@ var Modal = {
             }
         })
     },
+    displayCategoriesForm: function(categories){
+        var select_categories = document.getElementById("sel_cat");
+        for (var i=0; i<categories.length; i++){
+            var opt_category = document.createElement("option");
+            select_categories.appendChild(opt_category);
+            opt_category.innerHTML = categories[i];
+        }
+    },
     getTaskFromModal: function(){
         var task_name = document.getElementById("task_name").value;
         var task_desc = document.getElementById("task_desc").value;
@@ -50,8 +58,12 @@ var Modal = {
         }
         if(t_time.checked){
             var task_time = document.getElementById("task_time").value;
+            var time_array = task_time.split(":");
+            var minutes = time_array[1];
+            var hours = time_array[0];
+            var task_red_time = Math.floor((parseInt(minutes) + parseInt(hours)*60)/5);
             task.time = task_time;
-
+            task.red_time = task_red_time;
         }
         if  (t_checkbox.checked){
             var ul_checkbox = document.getElementById("ulCheckbox");
@@ -67,11 +79,11 @@ var Modal = {
     },
     formatDate: function (date) {
         var result_date = new Date(date);
-        var result = this.addZero(result_date.getUTCDate()) + "."
-            + this.addZero(result_date.getUTCMonth()) + "."
+        var result = Time.addZero(result_date.getUTCDate()) + "."
+            + Time.addZero(result_date.getUTCMonth()) + "."
             + result_date.getUTCFullYear() + " "
-            + this.addZero(result_date.getUTCHours()) + ":"
-            + this.addZero(result_date.getUTCMinutes());
+            + Time.addZero(result_date.getUTCHours()) + ":"
+            + Time.addZero(result_date.getUTCMinutes());
 
         return result;
     },
@@ -99,13 +111,13 @@ var Modal = {
             task_time.classList.add("time");
             task_time.innerHTML = task.time;
             sticky_li.appendChild(task_time);
-            observeTime(task);
+            Time.observeTime(task);
         }
         if(task_deadlineV != undefined){
             var task_deadline = document.createElement("h5");
             task_deadline.innerHTML = Modal.formatDate(task.deadline);
             sticky_li.appendChild(task_deadline);
-            observeTimeDeadline(task);
+            Time.observeTimeDeadline(task);
         }
         if(task.checkbox != undefined){
             var ul_checkbox = document.createElement("ul");
@@ -188,25 +200,16 @@ var Modal = {
         this.showHideCat('t_time','t_certain_t');
         this.showHideCat('t_checkbox','taskWithCheckbox');
     },
-    addZero: function(number){
-        if (typeof number == "string"){
-            number = parseInt(number);
-        }
-        var result;
-        if (number < 10){
-            result = "0" + number;
-        } else {
-            result = number;
-        }
-        return result;
-    },
+
     addNewTask: function (){
         if (TaskValidation.validationForm() != true){
             return;
         }
         var task = this.getTaskFromModal();
         task = Couch.createTask(task);
-        this.displayTask(task);
+        if(task.category == CONTEXT.category){
+            this.displayTask(task);
+        }
         this.cleanForm();
         this.showHideModal();
     }

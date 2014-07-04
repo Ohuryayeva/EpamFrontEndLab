@@ -38,5 +38,5 @@ function drop(ev) {
     var task = Couch.getTask(task_id);
     task.status = ul_target.id;
     Couch.updateTask(task);
-    observeTime(task);
+    Time.observeTime(task);
 }

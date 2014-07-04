@@ -103,9 +103,9 @@ var Couch = {
     deleteTask: function(task){
         var li_element = document.getElementById(task._id)
         var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', '/couch/' + this.db +'/'+ task_id, false);
+        xhr.open('DELETE', '/couch/' + this.db + '/' + task._id + "?rev=" + task._rev, false);
         xhr.setRequestHeader("Authorization", this.auth);
-        xhr.send(JSON.stringify(task));
+        xhr.send(JSON.stringify());
     },
     getURLParameter :function (name) {
         return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null

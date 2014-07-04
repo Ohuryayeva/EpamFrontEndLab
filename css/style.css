@@ -83,10 +83,7 @@ ul#finished{
     -moz-box-shadow:    4px 2px 5px 0px rgba(0, 0, 0, 0.79);
     box-shadow:         4px 2px 5px 0px rgba(0, 0, 0, 0.79);
 }
-.md-content  #modal_scroll{
-    overflow: auto;
-    max-height: 300px;
-}
+
 
 .md-content h3 {
     position: relative;
@@ -114,10 +111,10 @@ ul#finished{
     display: inline-block;
 }
 .md-content .label{
-    width: 30%;
+    width: 34%;
 }
 .md-content .data {
-    width: 69%;
+    width: 64%;
     vertical-align: top;
 }
 .md-content > div > div {
@@ -130,7 +127,7 @@ ul#finished{
 .md-content > a >span{
     position: absolute;
     width: 25px;
-    top:18px;
+    top:10px;
     right: 10px;
     background-color: #014f6e;
     color: #ffffff;
