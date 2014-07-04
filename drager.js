@@ -1,35 +1,49 @@
-function text() {
-    document.getElementById('input').style.display = "block";
+function text(){
+ document.getElementById('input').style.display = "block";
+ document.getElementById('Add').style.display = "none";
+ document.getElementById('submit').style.display = "block";
+
 }
 
-function myFunction() {
-    var parent = document.getElementById("category");
-    var categoryName = document.getElementById('input').value;
+function myFunction(){
+var parent =document.getElementById("category");
+var categoryName = document.getElementById('input').value;
 
-    if (categoryName == "") {
-        categoryName = "New Category";
-    }
+if (categoryName=="") { categoryName="New Category";
+}   
 
-    var newCategory = document.createElement('li');
+var newCategory = document.createElement('li');
 
-    newCategory.className = "stick";
-    var id = document.getElementById("category").childElementCount + 1;
-    newCategory.id = id;
-    newCategory.setAttribute("draggable", "true");
-    newCategory.setAttribute("ondragstart", "drag(event)");
+newCategory.className="stick";
+var id = parseInt(document.getElementById("category").lastChild.id)+1;
+newCategory.id= id;
+newCategory.setAttribute("draggable","true");
+newCategory.setAttribute("ondragstart","drag(event)");
+newCategory.setAttribute("tabindex",""+id+"");
 
-    var newB = document.createElement('button');
-    newB.className = "delet";
-    newB.innerHTML = newB.innerHTML + '&#x2718;';
-    newB.setAttribute("onclick", "delet(" + id + ")")
-    newCategory.appendChild(newB);
+var newB = document.createElement('div');
+newB.className="delet";
+newB.innerHTML = newB.innerHTML + '&#x2718;';
+newB.setAttribute("onclick","overlay("+id+")")
+newCategory.appendChild(newB);
 
-    var newH = document.createElement('h2');
-    newH.innerHTML = categoryName;
-    newCategory.appendChild(newH);
-    parent.appendChild(newCategory);
-    document.getElementById('input').style.display = "none";
-    document.getElementById('input').value = "";
+var newH = document.createElement('h2');
+newH.innerHTML = categoryName;
+newCategory.appendChild(newH);
+
+parent.appendChild(newCategory);
+document.getElementById('input').style.display = "none";
+document.getElementById('input').value="";
+
+
+ if ( document.getElementById('input').style.display = "none"){
+		document.getElementById('Add').style.display = "block";
+		document.getElementById('submit').style.display = "none";
+	 }
+
+
+    
+    
 
     var categories_in_form = document.getElementById("sel_cat");
     var new_category = document.createElement("option");
@@ -53,6 +67,19 @@ function delet(num) {
             categories_in_form.removeChild(categories_in_form[i])
         }
     }
-    element.parentNode.removeChild(element);
-    return false;
+     element.parentNode.removeChild(element);
+    exitModalWindow();
 }
+function overlay(id){
+
+modalWindow = document.getElementById("modalWindow");
+
+modalWindow.children[1].setAttribute("onclick","delet("+id+")");
+modalWindow.children[2].setAttribute("onclick","exitModalWindow()");
+
+document.getElementById('modalWindow').style.visibility="visible"; 
+
+}
+function exitModalWindow(){ document.getElementById("modalWindow").style.visibility = 'hidden';
+}
+
