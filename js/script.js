@@ -108,20 +108,16 @@ var Time = {
     }
 }
 
-function displayCategories(categories){
-    var ul_categories = document.getElementById("category");
-    for (var i=0; i<categories.length; i++){
-        var li_category = document.createElement("li");
-        ul_categories.appendChild(li_category);
-        li_category.className = "stick";
-        li_category.setAttribute('onclick', 'changeCategory(this)');
-        li_category.innerHTML = categories[i];
-    }
-}
+
 
 function changeCategory(cat_element){
     removeTask();
-    var category = cat_element.innerHTML;
+    var categories = cat_element.parentNode.getElementsByTagName('li');
+    for (var i =0; i < categories.length; i++){
+        categories[i].classList.remove('active');
+    }
+    cat_element.classList.add('active');
+    var category = cat_element.getElementsByTagName('h2')[0].innerHTML;
     CONTEXT.category =category;
     Modal.displayTasks(category);
 }

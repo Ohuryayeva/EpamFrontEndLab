@@ -8,31 +8,6 @@
     font-weight: normal;
     margin-bottom: 5px;
 }
-/*ul#planned, ul#started, ul#finished{
-    list-style: none;
-    height: 300px;
-    width: 200px;
-    margin-right: 20px;
-    padding: 0;
-    float: left;
-}
-ul#planned li,ul#started li , ul#finished li{
-    border: 1px solid #000000;
-    background-color: pink;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 10px;
-
-}
-ul#planned{
-    border: 2px solid yellow;
-}
-ul#started{
-    border: 2px solid green;
-}
-ul#finished{
-    border: 2px solid deeppink;
-}*/
 
 .md-modal {
     position: fixed;

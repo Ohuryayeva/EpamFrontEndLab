@@ -101,7 +101,7 @@ ul .sticky:nth-child(5n) {
     background: #ccf;
 }
 
-.delete{
+#delete_task{
     display: none;
     position: absolute;
     right: 10px;
@@ -111,7 +111,7 @@ ul .sticky:nth-child(5n) {
 
 
 
-ul .sticky:hover .delete{
+ul .sticky:hover #delete_task{
     display: block;
 }
 

@@ -21,7 +21,7 @@ input[type=text]:focus, {
 } 
 
 
-ul .stick:focus {
+ul .stick:hover, .stick.active{
   background: orange;
 }
 
@@ -78,7 +78,7 @@ ul .stick {
 }
 
 
-ul .stick:hover {
+/*ul .stick:hover {
     position: relative;
     z-index: 5;
     cursor: pointer;
@@ -90,7 +90,7 @@ ul .stick:hover {
 	background: -ms-linear-gradient(top, rgba(225,225,249,0.85) 0%, rgba(217,217,232,0.85) 13%, rgba(180,181,207,0.85) 36%, rgba(217,217,232,0.85) 55%, rgba(218,218,233,0.85) 57%, rgba(242,242,248,1) 100%);
 	background: linear-gradient(to bottom, rgba(225,225,249,0.85) 0%, rgba(217,217,232,0.85) 13%, rgba(180,181,207,0.85) 36%, rgba(217,217,232,0.85) 55%, rgba(218,218,233,0.85) 57%, rgba(242,242,248,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1f9', endColorstr='#f2f2f8', GradientType=0 );
-	}
+	}*/
 
 ul .stick:hover .delet{
     display: block;

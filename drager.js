@@ -5,50 +5,75 @@ function text(){
 
 }
 
-function myFunction(){
-var parent =document.getElementById("category");
-var categoryName = document.getElementById('input').value;
+function displayCategory(categoryName, active) {
+    var parent = document.getElementById("category");
 
-if (categoryName=="") { categoryName="New Category";
-}   
+    if (categoryName == "") {
+        categoryName = "New Category";
+    }
 
-var newCategory = document.createElement('li');
+    var newCategory = document.createElement('li');
 
-newCategory.className="stick";
-var id = parseInt(document.getElementById("category").lastChild.id)+1;
-newCategory.id= id;
-newCategory.setAttribute("draggable","true");
-newCategory.setAttribute("ondragstart","drag(event)");
-newCategory.setAttribute("tabindex",""+id+"");
+    newCategory.className = "stick";
+    var last_id = document.getElementById("category").lastChild.id;
+    var id = last_id == undefined ? 1 : parseInt(last_id) + 1;
 
-var newB = document.createElement('div');
-newB.className="delet";
-newB.innerHTML = newB.innerHTML + '&#x2718;';
-newB.setAttribute("onclick","overlay("+id+")")
-newCategory.appendChild(newB);
+    newCategory.id = id;
+    newCategory.setAttribute("draggable", "true");
+    newCategory.setAttribute("ondragstart", "drag(event)");
+    newCategory.setAttribute("tabindex", "" + id + "");
+    newCategory.setAttribute('onclick', 'changeCategory(this)');
 
-var newH = document.createElement('h2');
-newH.innerHTML = categoryName;
-newCategory.appendChild(newH);
+    var newB = document.createElement('div');
+    newB.className = "delet";
+    newB.innerHTML = newB.innerHTML + '&#x2718;';
+    newB.setAttribute("onclick", "overlay(" + id + ")")
+    newCategory.appendChild(newB);
 
-parent.appendChild(newCategory);
-document.getElementById('input').style.display = "none";
-document.getElementById('input').value="";
+    var newH = document.createElement('h2');
+    newH.innerHTML = categoryName;
+    newCategory.appendChild(newH);
+
+    if (active == true){
+        newCategory.classList.add('active');
+    } else {
+        newCategory.classList.remove('active');
+
+    }
+
+    parent.appendChild(newCategory);
+
+    document.getElementById('input').style.display = "none";
+    document.getElementById('input').value = "";
 
 
- if ( document.getElementById('input').style.display = "none"){
-		document.getElementById('Add').style.display = "block";
-		document.getElementById('submit').style.display = "none";
-	 }
+    if (document.getElementById('input').style.display = "none") {
+        document.getElementById('Add').style.display = "block";
+        document.getElementById('submit').style.display = "none";
+    }
 
-
-    
-    
 
     var categories_in_form = document.getElementById("sel_cat");
     var new_category = document.createElement("option");
     categories_in_form.appendChild(new_category);
     new_category.innerHTML = categoryName;
+
+}
+function myFunction() {
+    var categoryName = document.getElementById('input').value;
+    displayCategory(categoryName, false);
+}
+
+function displayCategories(categories){
+    var ul_categories = document.getElementById("category");
+    for (var i=0; i<categories.length; i++){
+        if (i == 0){
+            displayCategory(categories[i], true);
+        } else {
+            displayCategory(categories[i], false);
+        }
+
+    }
 }
 
 function onEnter() {

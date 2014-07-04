@@ -90,6 +90,17 @@ var Modal = {
     displayTask: function(task){
         var ul_target = document.getElementById(task.status);
         var sticky_li = document.createElement("li");
+        var remove_button = document.createElement("div");
+        remove_button.id = "delete_task";
+        remove_button.innerHTML = "x";
+        remove_button.onclick = function(e){
+            var li_element = e.target.parentNode;
+            var id = li_element.getAttribute("id");
+            var task = Couch.getTask(id);
+            Couch.deleteTask(task);
+            li_element.parentNode.removeChild(li_element);
+
+        };
         sticky_li.className ="sticky";
         sticky_li.setAttribute("id", task._id);
         sticky_li.setAttribute("draggable","true");
@@ -101,6 +112,7 @@ var Modal = {
         task_name.innerHTML = task.name;
         ul_target.appendChild(sticky_li);
         sticky_li.appendChild(task_name);
+        sticky_li.appendChild(remove_button);
         if(task_desc != undefined){
             var task_description = document.createElement("p");
             task_description.innerHTML =task.description;

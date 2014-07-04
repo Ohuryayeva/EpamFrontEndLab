@@ -24,9 +24,9 @@ var TaskValidation = {
         var task_time_element = document.getElementById("task_time");
         if (document.getElementById("t_certain_t").style.display == 'block'){
             var task_time = task_time_element.value;
-            var time_check = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+            var time_check = /^([0-1][0-9]|2[0-3])\:[0-5][0-9]$/;
             if (time_check.test(task_time) == false) {
-                this.showErrorMessage(task_time_element, "You should write only numbers from 0 to 60")
+                this.showErrorMessage(task_time_element, "Write time in right format")
             }
             return time_check.test(task_time);
         } else {

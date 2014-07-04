@@ -18,19 +18,6 @@
 
 	<ul id="category" ondrop="drop(event)" ondragover="allowDrop(event)">
 
-		 <li class="stick" id="1" draggable="true" ondragstart="drag(event)" tabindex="1" >
-			<div class="delet" onclick="overlay(1)">&#x2718;</div>
-		        <h2>Shop</h2>
-
-       		</li>
-    		<li class="stick"  id="2"draggable="true" ondragstart="drag(event)" tabindex="2" >
-			<div class="delet" onclick="overlay(2)">&#x2718;</div>
-			 <h2>Work</h2>
-		
-    		<li class="stick"  id="3"draggable="true" ondragstart="drag(event)" tabindex="3" >
-			<div  class="delet" onclick="overlay(3)">&#x2718;</div>
-			 <h2>Home</h2>
-
 	</ul>
 
 </div>
@@ -95,7 +82,7 @@
                 </div>
                 <div class="element" id="t_certain_t">
                     <div class="label">
-                        <label for="task_time">Time to do this</label>
+                        <label for="task_time">Time to do this (hh:mm")</label>
                     </div>
                     <div class="data">
                         <input type="time" name="task_time" id="task_time" onkeyup="TaskValidation.removeError(this)">
