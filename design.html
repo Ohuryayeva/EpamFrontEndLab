@@ -9,26 +9,31 @@
 </head>
 <body>
 
-<ul id="category" ondrop="drop(event)" ondragover="allowDrop(event)">
+<div id="UpContent">
+	<div>
+		<input type="text" id="input" style="display:none;" onkeydown="onEnter()">
+		<button id="Add" onclick="text()"  >Add category</button>
+		<button id="submit" onclick="myFunction()" style="display:none">Add category</button>
+      	</div>
 
-	 <div>
-    	<input type="text" id="input" style="display:none;" onkeydown="onEnter()">
-    	<button id="Add" onclick="text()"  >Add category</button>
-     </div>
+	<ul id="category" ondrop="drop(event)" ondragover="allowDrop(event)">
 
-    <!--<li class="stick" id="1" draggable="true" ondragstart="drag(event)">
-			<button class="delet" onclick="delet(1)">&#x2718;</button>
-        <h2>Shop</h2>
+		 <li class="stick" id="1" draggable="true" ondragstart="drag(event)" tabindex="1" >
+			<div class="delet" onclick="overlay(1)">&#x2718;</div>
+		        <h2>Shop</h2>
 
-       </li>
-    <li class="stick"  id="2"draggable="true" ondragstart="drag(event)">
-			<button class="delet" onclick="delet(2)">&#x2718;</button>
-        <h2>Work</h2>
+       		</li>
+    		<li class="stick"  id="2"draggable="true" ondragstart="drag(event)" tabindex="2" >
+			<div class="delet" onclick="overlay(2)">&#x2718;</div>
+			 <h2>Work</h2>
+		
+    		<li class="stick"  id="3"draggable="true" ondragstart="drag(event)" tabindex="3" >
+			<div  class="delet" onclick="overlay(3)">&#x2718;</div>
+			 <h2>Home</h2>
 
-    <li class="stick"  id="3"draggable="true" ondragstart="drag(event)">
-			<button class="delet" onclick="delet(3)">&#x2718;</button>
-        <h2>Home</h2>-->
-</ul>
+	</ul>
+
+</div>
 
 
 <a href="javascript:void(0)" class="button add" data-modal="modal" onclick="Modal.showHideModal()">Add</a>
@@ -136,6 +141,16 @@
 
 
 <ul id="finished" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
+
+
+
+<div id="modalWindow">
+
+	<p> Are you sure?</p>
+	<div class="yes" >YES</div>
+	<div class="no" >NO</div>  
+	
+</div>
 
 </body>
 <script src="drager.js"></script>
