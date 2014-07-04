@@ -1,12 +1,28 @@
 #category {
-    float: left;
-    width: 15%;
-    list-style-type: none;
+	list-style-type: none;
+	text-decoration: none;
+	
+}
+#UpContent {float: left;
+			width: 20%;
+		margin-top: 1px;
 }
 
 body {
     font: normal 14px/20px Segoe Script, sans-serif;
     background: #CBF0F0;
+}
+
+input[type=text]:focus, {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+} 
+
+
+ul .stick:focus {
+  background: orange;
 }
 
 
@@ -17,28 +33,27 @@ ul .stick {
     position: relative;
     max-width: 15em;
 	margin-top:10px;
-		background-image: -webkit-gradient(
-		linear,
-		left top,
-		left bottom,
-		color-stop(0.5, #1165BA),
-		color-stop(1, #15E4EB)
-	);
-	background-image: -o-linear-gradient(bottom, #1165BA 50%, #15E4EB 100%);
-	background-image: -moz-linear-gradient(bottom, #1165BA 50%, #15E4EB 100%);
-	background-image: -webkit-linear-gradient(bottom, #1165BA 50%, #15E4EB 100%);
-	background-image: -ms-linear-gradient(bottom, #1165BA 50%, #15E4EB 100%);
-	background-image: linear-gradient(to bottom, #1165BA 50%, #15E4EB 100%);
+	margin-left:20px;
+	
+	background: rgba(242,242,248,1);
+	background: -moz-linear-gradient(top, rgba(242,242,248,1) 0%, rgba(218,218,233,0.85) 43%, rgba(217,217,232,0.85) 45%, rgba(180,181,207,0.85) 64%, rgba(217,217,232,0.85) 87%, rgba(225,225,249,0.85) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(242,242,248,1)), color-stop(43%, rgba(218,218,233,0.85)), color-stop(45%, rgba(217,217,232,0.85)), color-stop(64%, rgba(180,181,207,0.85)), color-stop(87%, rgba(217,217,232,0.85)), color-stop(100%, rgba(225,225,249,0.85)));
+	background: -webkit-linear-gradient(top, rgba(242,242,248,1) 0%, rgba(218,218,233,0.85) 43%, rgba(217,217,232,0.85) 45%, rgba(180,181,207,0.85) 64%, rgba(217,217,232,0.85) 87%, rgba(225,225,249,0.85) 100%);
+	background: -o-linear-gradient(top, rgba(242,242,248,1) 0%, rgba(218,218,233,0.85) 43%, rgba(217,217,232,0.85) 45%, rgba(180,181,207,0.85) 64%, rgba(217,217,232,0.85) 87%, rgba(225,225,249,0.85) 100%);
+	background: -ms-linear-gradient(top, rgba(242,242,248,1) 0%, rgba(218,218,233,0.85) 43%, rgba(217,217,232,0.85) 45%, rgba(180,181,207,0.85) 64%, rgba(217,217,232,0.85) 87%, rgba(225,225,249,0.85) 100%);
+	background: linear-gradient(to bottom, rgba(242,242,248,1) 0%, rgba(218,218,233,0.85) 43%, rgba(217,217,232,0.85) 45%, rgba(180,181,207,0.85) 64%, rgba(217,217,232,0.85) 87%, rgba(225,225,249,0.85) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f8', endColorstr='#e1e1f9', GradientType=0 );
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
 
-#input { height: 40px;
+#input { height: 30px;
 		position: relative;
-		max-width: 15em;
-		width: 200px;
+		margin-left:25px;
+		width: 210px;
 		margin-bottom: 10px;
+		margin-top: 10px;
 }
 	
 
@@ -46,16 +61,14 @@ ul .stick {
 
 
 .delet{
-	 display: none;
-	 position: absolute;
-	background-color:red;
+	position: absolute;
+	color: black;
+	right: 2px;
+	top: 12px;
+    display: none;
+    position: absolute;
 	width:20px;
 	height:20px;
-	right: 8px;
-    	top: 10px;
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	border-radius: 50%;
 	-moz-opacity: 0.72;
 	-khtml-opacity: 0.72;
 	opacity: 0.72;
@@ -69,24 +82,21 @@ ul .stick:hover {
     position: relative;
     z-index: 5;
     cursor: pointer;
-		background-image: -webkit-gradient(
-	linear,
-	left top,
-	left bottom,
-	color-stop(0, #15E4EB),
-	color-stop(0.5, #1165BA)
-	);
-	background-image: -o-linear-gradient(bottom, #15E4EB 0%, #1165BA 50%);
-	background-image: -moz-linear-gradient(bottom, #15E4EB 0%, #1165BA 50%);
-	background-image: -webkit-linear-gradient(bottom, #15E4EB 0%, #1165BA 50%);
-	background-image: -ms-linear-gradient(bottom, #15E4EB 0%, #1165BA 50%);
-	background-image: linear-gradient(to bottom, #15E4EB 0%, #1165BA 50%);
-}
+	background: rgba(225,225,249,0.85);
+	background: -moz-linear-gradient(top, rgba(225,225,249,0.85) 0%, rgba(217,217,232,0.85) 13%, rgba(180,181,207,0.85) 36%, rgba(217,217,232,0.85) 55%, rgba(218,218,233,0.85) 57%, rgba(242,242,248,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(225,225,249,0.85)), color-stop(13%, rgba(217,217,232,0.85)), color-stop(36%, rgba(180,181,207,0.85)), color-stop(55%, rgba(217,217,232,0.85)), color-stop(57%, rgba(218,218,233,0.85)), color-stop(100%, rgba(242,242,248,1)));
+	background: -webkit-linear-gradient(top, rgba(225,225,249,0.85) 0%, rgba(217,217,232,0.85) 13%, rgba(180,181,207,0.85) 36%, rgba(217,217,232,0.85) 55%, rgba(218,218,233,0.85) 57%, rgba(242,242,248,1) 100%);
+	background: -o-linear-gradient(top, rgba(225,225,249,0.85) 0%, rgba(217,217,232,0.85) 13%, rgba(180,181,207,0.85) 36%, rgba(217,217,232,0.85) 55%, rgba(218,218,233,0.85) 57%, rgba(242,242,248,1) 100%);
+	background: -ms-linear-gradient(top, rgba(225,225,249,0.85) 0%, rgba(217,217,232,0.85) 13%, rgba(180,181,207,0.85) 36%, rgba(217,217,232,0.85) 55%, rgba(218,218,233,0.85) 57%, rgba(242,242,248,1) 100%);
+	background: linear-gradient(to bottom, rgba(225,225,249,0.85) 0%, rgba(217,217,232,0.85) 13%, rgba(180,181,207,0.85) 36%, rgba(217,217,232,0.85) 55%, rgba(218,218,233,0.85) 57%, rgba(242,242,248,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1f9', endColorstr='#f2f2f8', GradientType=0 );
+	}
 
 ul .stick:hover .delet{
     display: block;
 }
 .delet:hover{
+	color:red;
 	-moz-opacity: 1;
 	-khtml-opacity: 1;
 	opacity: 1;
@@ -106,8 +116,9 @@ ul .stick:hover .delet{
 
 
 h2 {
-    padding-bottom: 25px;
-	text-align:center;
+	margin: 10px;
+	padding: 12px;
+	text-align: center;
 
 }
 
@@ -119,32 +130,32 @@ h5 {
 
 
 
-#Add {
+#Add,#submit {
     display: inline-block;
     white-space: nowrap;
     background-color: #0FCAB5;
     background-image: linear-gradient(top, #eee, #ccc);
     border: 1px solid #0FCAB5;
     padding: 0 1.5em;
-    margin-bottom: 0.5em;
-    margin-top: -0.5em;
+    margin: 0.5em;
+	margin-left:25px;
     font: bold 1em/2em Arial, Helvetica;
     text-decoration: none;
     color: #333;
     text-shadow: 0 1px 0 rgba(255,255,255,.8);
     border-radius: .2em;
     box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
-    width: 205px;
+	width: 210px;
 }
 
-#Add:hover {
+#Add:hover, #submit:hover {
     background-color: #0FEDCE;
     background-image: linear-gradient(top, #fafafa, #0FEDCE);
 }
 
 
 
-#Add:before {
+#Add:before,#submit:before {
     background: #0FCAB5;
     background: rgba(0,0,0,.1);
  
@@ -155,5 +166,56 @@ h5 {
     padding: 0 .2em;
     box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
     border-radius: .15em 0 0 .15em;
-    pointer-events: none;
+
 }
+
+#overlay {
+	font-size:20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    max-width: 630px;
+    min-width: 320px;
+    z-index: 2000;
+    visibility: hidden;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+
+
+#overlay .middle {
+     width:300px;
+     margin: 100px auto;
+     background-color: #fff;
+     border:1px solid #000;
+     padding:15px;
+     text-align:center;
+}
+
+#overlay .middle p{color:black;}
+
+.yes:hover,.no:hover{
+		font-size: 30px;
+		cursor: pointer
+}
+
+#modalWindow {width:300px;
+		height:120px;
+		margin: 100px auto;
+		display:block;
+		text-align:center;
+		font-size:20px;
+		visibility: hidden;
+		border: 1px solid black;
+		background: linear-gradient(to bottom, #cff4fa, #abcfd4);
+		position: absolute;
+		top: 30%;
+		left: 40%;
+}
+
+.yes:hover {color:red;
+} 		
+.no:hover {color:red;} 	
