@@ -1,27 +1,20 @@
-/*
- function allowDrop(ev) {
- ev.preventDefault();
- }
+var dragIcon = document.createElement('img');
 
- function drag(ev) {
- ev.dataTransfer.setData("Text", ev.target.id);
- }
+dragIcon.src = 'logo.png';
 
- function drop(ev) {
- ev.preventDefault();
- var data = ev.dataTransfer.getData("Text");
- ev.target.appendChild(document.getElementById(data));
- ev.stopPropagation();
+var elements = [document.getElementById("planned"),document.getElementById("started"),document.getElementById("finished")];
 
- }*/
-
-
+for(var i = 0, length = elements.length; i < length; i++) {
+        elements[i].style.minHeight = window.innerHeight - 90;
+}
 
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
 function drag(ev) {
+
+    ev.dataTransfer.setDragImage(dragIcon, -10, -10);
     ev.dataTransfer.setData("task_id", ev.target.id);
 }
 
