@@ -38,10 +38,10 @@ function countdownTime(task_id, countdown_time) {
     }, 1000);
     CONTEXT.intervalIds[task_id] = intervalId;
 }
-Couch.getTasks();
-Modal.displayTasks();
-
-
+var configuration = Couch.login();
+Modal.displayTasks(configuration.categories[0]);
+displayCategories(configuration.categories);
+displayCategoriesForm(configuration.categories);
 
 function observeTime(task){
     var li_time = document.getElementById(task._id);
@@ -94,4 +94,46 @@ function observeTimeDeadline(task){
         time_to_deadline = "To deadline " + (diff.getUTCDate()-1) + "d "+ diff.getUTCHours() + "h " + diff.getUTCMinutes() + "m " + diff.getUTCSeconds() + "s ";
         deadline_element.innerHTML = time_to_deadline;
     },1000)
+}
+
+function displayCategories(categories){
+    var ul_categories = document.getElementById("category");
+    for (var i=0; i<categories.length; i++){
+        var li_category = document.createElement("li");
+        ul_categories.appendChild(li_category);
+        li_category.className = "stick";
+        li_category.setAttribute('onclick', 'changeCategory(this)');
+        li_category.innerHTML = categories[i];
+    }
+}
+function displayCategoriesForm(categories){
+    var select_categories = document.getElementById("sel_cat");
+    for (var i=0; i<categories.length; i++){
+        var opt_category = document.createElement("option");
+        select_categories.appendChild(opt_category);
+        opt_category.innerHTML = categories[i];
+    }
+}
+function changeCategory(cat_element){
+    removeTask();
+    var category = cat_element.innerHTML;
+    Modal.displayTasks(category);
+}
+function removeTask(){
+    document.getElementById("planned").innerHTML = "";
+    document.getElementById("started").innerHTML = "";
+    document.getElementById("finished").innerHTML = "";
+
+}
+
+function pullToDone(task){
+    if(task.checkbox != undefined){
+        for(var i=0; i< task.checkbox.length; i++){
+            var check_status = task.checkbox[i].done;
+            this.displayCheckBox(check_option, ul_checkbox);
+        }
+    }
+
+
+
 }

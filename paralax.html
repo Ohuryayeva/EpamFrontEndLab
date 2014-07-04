@@ -1,7 +1,16 @@
 <!DOCTYPE html>
+<html>
 <head>
     <title>Parallax</title>
     <link href="css/paralax.css" rel="stylesheet" type="text/css"/>
+    <script>
+        function login() {
+            var name = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var hash = window.btoa(name + ":" + password);
+            window.location = "/design.html?auth=" + hash;
+        }
+    </script>
 </head>
 <body>
 <div class="pss_main">
@@ -13,7 +22,7 @@
 
 
     <div class="pss_slides">
-        <ul> 
+        <ul>
             <li>
                 <img src="http://torreyshannon.com/wp-content/uploads/2013/04/to-do-list.jpg" alt="image01"/>
             </li>
@@ -22,12 +31,13 @@
     </div>
     <form name="login-form" class="login-form" action="" method="post">
         <div class="content">
-          <input name="username" type="text" class="input username" placeholder="Username" />
-          <input name="password" type="password" class="input password" placeholder="Password" />
-            <input type="submit" name="submit" value="Login" class="button" />
-            <input type="submit" name="submit" value="Register" class="register" />
+            <input name="username" id="username" type="text" class="input username" placeholder="Username"/>
+            <input name="password" id="password" type="password" class="input password" placeholder="Password"/>
+            <a name="login" onclick="login()" style="color: yellow;">Login</a>
+            <input type="submit" name="submit" value="Register" class="register"/>
         </div>
     </form>
 </div>
+
 </body>
 </html>

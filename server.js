@@ -130,7 +130,7 @@ http.createServer(function (req, res) {
                     "type": "user",
                     "password": formData.password,
                     "configuration": {
-                        "groups": ["Personal", "Work", "Shopping"],
+                        "categories": ["Personal", "Work", "Shopping"],
                         "store_done_tasks": 3
                     }
                 }));
@@ -142,6 +142,9 @@ http.createServer(function (req, res) {
 
     } else {
         var file = req.url === '/' ? 'index.html' : req.url.substr(1);
+        if (file.indexOf("?") > -1){
+            file = file.split('?')[0];
+        }
         console.log("Get file " + file)
         fs.exists(file, function (exists) {
             if (exists) {
