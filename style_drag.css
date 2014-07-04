@@ -15,18 +15,18 @@
 
 
 
-.left {
+#planned {
     float: left;
     width: 27%;
 }
 
-.center {
+#started {
     float: left;
     width: 27%;
     margin: 0;
 }
 
-.right {
+#finished {
 
     float: left;
     width: 27%;
@@ -89,15 +89,15 @@ ul .sticky:nth-child(5n) {
     top: -10px;
 }
 
-.left > li {
+#planned > li {
     background: #ffc;
 }
 
-.center > li {
+#started > li {
     background: #cfc;
 }
 
-.right > li {
+#finished > li {
     background: #ccf;
 }
 
