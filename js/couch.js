@@ -1,13 +1,15 @@
-
+const CouchBDHOST = 'http://localhost:5984/';
+//const CouchBDHOST = 'http://epam-tasks-app.iriscouch.com/';
 var Couch = {
     db : "",
     auth : "",
     createTask: function(task){
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/couch/"+ this.db +"/", false);
+        xhr.open("POST", CouchBDHOST + this.db +"/", false, 'couch', 'couch');
         var task_id;
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.setRequestHeader("Authorization", this.auth);
+       // xhr.setRequestHeader("Authorization", this.auth);
+        xhr.withCredentials = true;
         xhr.onreadystatechange = function () {
             if (xhr.readyState != 4) return; //return if not complete
 
@@ -25,29 +27,33 @@ var Couch = {
     login : function(){
         var xhr = new XMLHttpRequest();
         var result;
-        var name = window.atob(this.getURLParameter('auth')).split(":")[0];
-        xhr.open('GET', '/couch/_users/org.couchdb.user:' + name , false);
-        var auth = "Basic " + this.getURLParameter('auth');
-        xhr.setRequestHeader("Authorization", auth);
-        xhr.onreadystatechange = function () {
+        var auth = this.getAuthCookie();
+        if (auth == undefined || auth == ''){
+            result = false;
+        } else
+        {
+            var name = window.atob(auth.replace("Basic ", "")).split(":")[0];
+            xhr.open('GET', CouchBDHOST + name, false);
+            xhr.setRequestHeader("Authorization", auth);
+            xhr.onreadystatechange = function () {
 
-            if (xhr.readyState != 4) return; //return if not complete
-            if (xhr.status != 200) { //check request status
-                alert('Error ' + xhr.status + ': ' + xhr.statusText);
-                return;
+                if (xhr.readyState != 4) return; //return if not complete
+                if (xhr.status == 200) { //check request status
+                    result = true;
+                    Couch.auth = auth;
+                    Couch.db = name;
+                } else {
+                    result = false;
+                }
             }
-            Couch.auth = auth;
-            Couch.db = name;
-            var dataJson = xhr.responseText;
-            Couch.user_info = JSON.parse(dataJson);
+            xhr.send();
         }
-        xhr.send();
-        return  this.user_info.configuration;
+        return  result;
     },
     getTask: function(task_id){
         var xhr = new XMLHttpRequest();
         var result;
-        xhr.open('GET', '/couch/' + this.db +'/'+ task_id, false);
+        xhr.open('GET', CouchBDHOST + this.db +'/'+ task_id, false);
         xhr.setRequestHeader("Authorization", this.auth);
         xhr.onreadystatechange = function () {
 
@@ -66,7 +72,7 @@ var Couch = {
         var xhr = new XMLHttpRequest();
         var plannedUl = document.getElementById("planned");
         var data_array = [];
-        xhr.open('GET', '/couch/' + this.db +'/_all_docs?include_docs=true', false);
+        xhr.open('GET', CouchBDHOST + this.db +'/_all_docs?include_docs=true', false);
         xhr.setRequestHeader("Authorization", this.auth);
         xhr.onreadystatechange = function () {
             if (xhr.readyState != 4) return; //return if not complete
@@ -96,19 +102,29 @@ var Couch = {
         var task_id = task._id;
         task.last_change = last_change;
         var xhr = new XMLHttpRequest();
-        xhr.open('PUT', '/couch/' + this.db +'/'+ task_id, false);
+        xhr.open('PUT', CouchBDHOST + this.db +'/'+ task_id, false);
         xhr.setRequestHeader("Authorization", this.auth);
         xhr.send(JSON.stringify(task));
     },
     deleteTask: function(task){
         var li_element = document.getElementById(task._id)
         var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', '/couch/' + this.db + '/' + task._id + "?rev=" + task._rev, false);
+        xhr.open('DELETE', CouchBDHOST + this.db + '/' + task._id + "?rev=" + task._rev, false);
         xhr.setRequestHeader("Authorization", this.auth);
         xhr.send(JSON.stringify());
     },
-    getURLParameter :function (name) {
-        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+    getAuthCookie :function (name) {
+        var cookies = document.cookie.split(";");
+        var auth;
+        for (var i=0; i < cookies.length; i++){
+            if ('auth' == cookies[i].split("=")[0]){
+                auth = decodeURIComponent(cookies[i].split("=")[1]);
+            }
+        }
+        return auth;
+    },
+    logout : function(){
+        document.cookie = "auth=;path=/;expires=-1;";
     }
 }
 

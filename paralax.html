@@ -7,7 +7,12 @@
             var name = document.getElementById("username").value;
             var password = document.getElementById("password").value;
             var hash = window.btoa(name + ":" + password);
-            window.location = "/design.html?auth=" + hash;
+
+            var exp_date = new Date();
+            exp_date.setDate(exp_date.getDate() +1 );
+            var auth = encodeURIComponent("Basic " + hash);
+            document.cookie = "auth=" + auth + ";path=/;expires=" + exp_date.toUTCString();
+            window.location = "design.html";
         }
     </script>
 </head>

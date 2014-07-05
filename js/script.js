@@ -5,7 +5,14 @@ var CONTEXT = {
 }
 
 function init(){
-    var configuration = Couch.login();
+    var login_ok = Couch.login();
+    if (login_ok == false){
+        window.location = "paralax.html";
+    }
+    var configuration = {
+        "categories": ["Personal", "Work", "Shopping"],
+        "store_done_tasks": 3
+    };
     CONTEXT.category = configuration.categories[0];
     Modal.displayTasks(CONTEXT.category);
     displayCategories(configuration.categories);
@@ -118,7 +125,7 @@ function changeCategory(cat_element){
     }
     cat_element.classList.add('active');
     var category = cat_element.getElementsByTagName('h2')[0].innerHTML;
-    CONTEXT.category =category;
+    CONTEXT.category = category;
     Modal.displayTasks(category);
 }
 function removeTask(){
