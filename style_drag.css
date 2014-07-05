@@ -17,19 +17,19 @@
 
 #planned {
     float: left;
-    width: 26%;
+    width: 24%;
 }
 
 #started {
     float: left;
-    width: 26%;
+    width: 24%;
     margin: 0;
 }
 
 #finished {
 
     float: left;
-    width: 25%;
+    width: 24%;
     margin: 0;
 }
 

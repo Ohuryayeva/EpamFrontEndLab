@@ -75,21 +75,21 @@ var Time = {
             var li_element = document.getElementById(task._id);
             var elements = li_element.getElementsByClassName("deadline");
             var deadline_element;
-            if (elements.length == 0){
+            if (elements.length == 0){//check if we didn't have deadline before
                 deadline_element = document.createElement("div");
                 deadline_element.classList.add('deadline');
                 li_element.appendChild(deadline_element);
             } else {
-                deadline_element = elements[0];
+                deadline_element = elements[0]; //if we had deadline before, we write in that div
             }
             var task_date = new Date(task.deadline);
-            var offset = new Date().getTimezoneOffset() * 60 * 1000;
-            var diff_ms = task_date.getTime() - new Date().getTime() + offset;
+            var offset = new Date().getTimezoneOffset() * 60 * 1000; // count the timezone difference between UTC and Local Time in ms
+            var diff_ms = task_date.getTime() - new Date().getTime() + offset; // count difference between task.deadline and today day
             if (diff_ms < 0){
                 clearInterval(intervalId);
                 li_element.style.backgroundColor = "red";
             }
-            var diff = new Date(diff_ms);
+            var diff = new Date(diff_ms); // return date from ms to date format
             time_to_deadline = "To deadline " + (diff.getUTCDate()-1) + "d "+ diff.getUTCHours() + "h " + diff.getUTCMinutes() + "m " + diff.getUTCSeconds() + "s ";
             deadline_element.innerHTML = time_to_deadline;
         },1000)

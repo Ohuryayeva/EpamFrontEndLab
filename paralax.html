@@ -2,6 +2,14 @@
 <head>
     <title>Parallax</title>
     <link href="css/paralax.css" rel="stylesheet" type="text/css"/>
+    <script>
+        function login() {
+            var name = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var hash = window.btoa(name + ":" + password);
+            window.location = "/design.html?auth=" + hash;
+        }
+    </script>
 </head>
 <body>
 <div class="pss_main">
@@ -25,7 +33,7 @@
                                 <input type="password" placeholder="Password" required="" id="password" />
                             </div>
                             <div>
-                                <input type="submit" value="Log in" />
+                                <input type="button" value="Log in" onclick="login()" />
                                 <a href="#">First visit?</a>
                             </div>
                         </form>
