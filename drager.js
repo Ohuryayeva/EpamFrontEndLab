@@ -98,6 +98,7 @@ function delet(num) {
 function overlay(id){
 
 modalWindow = document.getElementById("modalWindow");
+document.getElementById('box-inner').style.visibility="visible"; 
 
 modalWindow.children[1].setAttribute("onclick","delet("+id+")");
 modalWindow.children[2].setAttribute("onclick","exitModalWindow()");
@@ -106,5 +107,6 @@ document.getElementById('modalWindow').style.visibility="visible";
 
 }
 function exitModalWindow(){ document.getElementById("modalWindow").style.visibility = 'hidden';
+document.getElementById('box-inner').style.visibility="hidden"; 
 }
 
