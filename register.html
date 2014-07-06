@@ -3,92 +3,6 @@
     <head>
         <title></title>
 
-    <script type="application/javascript">
-        const CouchBDHOST = 'http://localhost:5984/';
-        const auth = "Basic Y291Y2g6Y291Y2g="; // hashed credentials couch:couch
-        function displayError(errorMsg) {
-            alert(errorMsg);
-        }
-        function displayWelcomeMessage() {
-            alert("You can login with your credentials");
-        }
-        function createUser() {
-            var errorMsg;
-            var name = document.getElementById('name').value;
-            var password = document.getElementById('pass').value;
-            // create User;
-            var createUserXhr = new XMLHttpRequest();
-            createUserXhr.open('PUT', CouchBDHOST +'_users/org.couchdb.user:' + name, false);
-            createUserXhr.setRequestHeader("Authorization", auth);
-            createUserXhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            createUserXhr.onreadystatechange = function () {
-                if (createUserXhr.readyState != 4) return; //return if not complete
-
-                if (createUserXhr.status != 201) { //check request status
-                    errorMsg = createUserXhr.statusText;
-                }
-            }
-            createUserXhr.send(JSON.stringify({
-                "_id": "org.couchdb.user:" + name,
-                "name": name,
-                "roles": [],
-                "type": "user",
-                "password": password,
-                "configuration": {
-                    "categories": ["Personal", "Work", "Shopping"],
-                    "store_done_tasks": 3
-                }
-            }));
-            if (errorMsg != undefined) {
-                displayError(errorMsg);
-                return;
-            }
-
-            //create db
-            var createDbXhr = new XMLHttpRequest();
-            createDbXhr.open('PUT', CouchBDHOST + name, false);
-            createDbXhr.setRequestHeader("Authorization", auth);
-            createDbXhr.onreadystatechange = function () {
-                if (createDbXhr.readyState != 4) return; //return if not complete
-
-                if (createDbXhr.status != 201) { //check request status
-                    errorMsg = createDbXhr.statusText;
-                }
-            }
-            createDbXhr.send();
-            if (errorMsg != undefined) {
-                displayError(errorMsg);
-                return;
-            }
-
-            //apply security
-            var dbSecurityXhr = new XMLHttpRequest();
-            dbSecurityXhr.open('PUT', CouchBDHOST + name + '/_security', false);
-            dbSecurityXhr.setRequestHeader("Authorization", auth);
-            dbSecurityXhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            dbSecurityXhr.onreadystatechange = function () {
-                if (dbSecurityXhr.readyState != 4) return; //return if not complete
-
-                if (dbSecurityXhr.status != 201) { //check request status
-                    errorMsg = createDbXhr.statusText;
-                }
-            }
-            dbSecurityXhr.send(JSON.stringify({
-                "admins": {
-                    "names": [],
-                    "roles": []},
-                "members": {
-                    "names": [name],
-                    "roles": []}
-            }));
-            if (errorMsg != undefined) {
-                displayError(errorMsg);
-                return;
-            } else {
-                displayWelcomeMessage();
-            }
-        }
-    </script>
     </head>
     <body>
     <form id="form_data">
@@ -96,8 +10,8 @@
         <input id="name" name="name" type="text">
         <label for="pass">Password :</label>
         <input id="pass" name="password"  type="password">
-        <input type="button" value="register" onclick="createUser()">
+        <input type="button" value="register" onclick="Couch.createUser()">
     </form>
-
+    <script src="js/couch.js"></script>
     </body>
 </html>

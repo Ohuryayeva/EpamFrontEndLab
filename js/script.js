@@ -11,9 +11,9 @@ function init(){
         window.location = "paralax.html";
     }
     var user = Couch.getUser();
-    CONTEXT.category = user.configuration.categories;
+    CONTEXT.category = user.configuration.categories[0];
     Modal.displayTasks(CONTEXT.category);
-    displayCategories(CONTEXT.category);
+    displayCategories(user.configuration.categories);
 
 }
 var Time = {
