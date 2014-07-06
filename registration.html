@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>reg</title>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <link rel="stylesheet" href="css/paralax.css">
 </head>
 <body>
@@ -33,12 +32,13 @@
     </section>
 </div>
 
-</body>
+<script type="application/javascript" src="js/couch.js"></script>
+
 <script>
 
 
     function Submit() {
-        var emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/;
+        /*var emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/;
         var
                 femail = document.form.Email.value,
                 freemail = document.form.enterEmail.value,
@@ -81,7 +81,9 @@
 
         if (femail != '' && freemail != '' && fpassword != '') {
             document.getElementById("errorBox").innerHTML = "form submitted successfully";
-        }
+        }*/
+        Couch.createUser();
     }
 </script>
+</body>
 </html>

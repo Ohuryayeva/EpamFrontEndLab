@@ -1,6 +1,6 @@
 @font-face {
-    font-family: Delicate Little Flower;
-    src: url('font/Mf%20Delicate%20Little%20Flower.ttf');
+    font-family: Rabbit Hole;
+    src: url('font/Rabbit%20Hole.ttf');
 }
 
 #box-inner {
@@ -27,7 +27,7 @@ z-index: 200;
 }
 
 body {
-    font: normal 14px/20px Delicate Little Flower, sans-serif;
+    font: normal 14px/20px Rabbit Hole, sans-serif;
     background: #CBF0F0;
 }
 
@@ -154,7 +154,7 @@ h5 {
     padding: 0 1.5em;
     margin: 0.5em;
 	margin-left:25px;
-    font: bold 1.3em/2em Delicate Little Flower, Helvetica;
+    font: bold 1.3em/2em Rabbit Hole, Helvetica;
     text-decoration: none;
     color: #333;
     text-shadow: 0 1px 0 rgba(255,255,255,.8);

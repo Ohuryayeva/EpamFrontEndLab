@@ -155,7 +155,9 @@
     border-radius: 7px;
     padding-left: 5px;
 }
-
+.md-content #show_message{
+    display: none;
+}
 .md-content #taskWithDeadline, .md-content #taskWithCheckbox, .md-content #t_certain_t{
     display: none;
 }

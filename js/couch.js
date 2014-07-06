@@ -186,15 +186,16 @@ var Couch = {
     },
 
     displayError: function(errorMsg) {
-        alert(errorMsg);
+        document.getElementById('errorBox').innerHTML = "username is already exists"
     },
     displayWelcomeMessage: function() {
-        alert("You can login with your credentials");
+        document.getElementById('errorBox').innerHTML = "<p>You can login with your credentials <a href='paralax.html' style='margin: 0px 35px 15px 0;'>Login </a></p>"
+
     },
     createUser:function() {
         var errorMsg;
-        var name = document.getElementById('name').value;
-        var password = document.getElementById('pass').value;
+        var name = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
         // create User;
         var createUserXhr = new XMLHttpRequest();
         createUserXhr.open('PUT', CouchBDHOST +'_users/org.couchdb.user:' + name, false);
@@ -219,7 +220,7 @@ var Couch = {
             }
         }));
         if (errorMsg != undefined) {
-            displayError(errorMsg);
+            this.displayError(errorMsg);
             return;
         }
 
@@ -236,7 +237,7 @@ var Couch = {
         }
         createDbXhr.send();
         if (errorMsg != undefined) {
-            displayError(errorMsg);
+            this.displayError(errorMsg);
             return;
         }
 
@@ -248,7 +249,7 @@ var Couch = {
         dbSecurityXhr.onreadystatechange = function () {
             if (dbSecurityXhr.readyState != 4) return; //return if not complete
 
-            if (dbSecurityXhr.status != 201) { //check request status
+            if (dbSecurityXhr.status != 200) { //check request status
                 errorMsg = createDbXhr.statusText;
             }
         }
@@ -261,10 +262,10 @@ var Couch = {
                 "roles": []}
         }));
         if (errorMsg != undefined) {
-            Couch.displayError(errorMsg);
+            this.displayError(errorMsg);
             return;
         } else {
-            Couch.displayWelcomeMessage();
+            this.displayWelcomeMessage();
         }
     }
 }
