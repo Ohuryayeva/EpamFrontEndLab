@@ -102,10 +102,12 @@ var Time = {
             if (diff_ms < 0){
                 clearInterval(intervalId);
                 li_element.style.backgroundColor = "red";
+                deadline_element.innerHTML = "Time is over";
+            } else {
+                var diff = new Date(diff_ms); // return date from ms to date format
+                time_to_deadline = "To deadline " + (diff.getUTCDate()-1) + "d "+ diff.getUTCHours() + "h " + diff.getUTCMinutes() + "m " + diff.getUTCSeconds() + "s ";
+                deadline_element.innerHTML = time_to_deadline;
             }
-            var diff = new Date(diff_ms); // return date from ms to date format
-            time_to_deadline = "To deadline " + (diff.getUTCDate()-1) + "d "+ diff.getUTCHours() + "h " + diff.getUTCMinutes() + "m " + diff.getUTCSeconds() + "s ";
-            deadline_element.innerHTML = time_to_deadline;
         },1000);
         CONTEXT.deadline_interval_ids[task._id] = intervalId;
     },

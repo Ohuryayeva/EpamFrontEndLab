@@ -86,7 +86,6 @@ var Couch = {
             }
             var dataJson = xhr.responseText;
             result = JSON.parse(dataJson);
-            Couch.tasks[result._id] = result;
         }
         xhr.send();
         return  result;
@@ -112,11 +111,6 @@ var Couch = {
             }
         }
         xhr.send();
-        this.tasks = {};
-        for(var i =0; i < data_array.length; i++){
-            var task = data_array[i];
-            this.tasks[task._id] = task;
-        }
         return data_array;
     },
     updateTask: function(task){
@@ -129,8 +123,6 @@ var Couch = {
         }
         var task_id = task._id;
         task.last_change = last_change;
-        var rev = this.getTask(task._id)._rev; // reset revision because of couch specific
-        task._rev = rev;
         var xhr = new XMLHttpRequest();
         xhr.open('PUT', CouchBDHOST + this.db +'/'+ task_id, false);
         xhr.setRequestHeader("Authorization", this.auth);
@@ -138,8 +130,6 @@ var Couch = {
     },
     deleteTask: function(task){
         var li_element = document.getElementById(task._id);
-        var rev = this.getTask(task._id)._rev;
-        task._rev = rev;
         var xhr = new XMLHttpRequest();
         xhr.open('DELETE', CouchBDHOST + this.db + '/' + task._id + "?rev=" + task._rev, false);
         xhr.setRequestHeader("Authorization", this.auth);
