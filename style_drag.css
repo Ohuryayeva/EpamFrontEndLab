@@ -143,7 +143,10 @@ p .sticky{
     text-decoration: underline;
 
 }
-
+div.deadline .sticky{
+    margin: 5px 0;
+    font-size: 1.2em;
+}
 .button {
     display: inline-block;
     white-space: nowrap;
