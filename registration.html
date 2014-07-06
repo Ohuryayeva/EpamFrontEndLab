@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>reg</title>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="stylesheet" href="css/paralax.css">
+</head>
+<body>
+<div id="emptyDiv"></div>
+<div id="description"></div>
+
+
+<div class="container">
+    <section id="content">
+
+                <form action="">
+                    <div id="errorBox"></div>
+                    <div id="email_form">
+                        <input type="text" name="Email" value="" placeholder="Your Email" id="username">
+                    </div>
+                    <div id="Re_email_form">
+                        <input type="text" name="enterEmail" value="" placeholder="Re-enter Email"
+                               id="password">
+                    </div>
+                    <div id="password_form">
+                        <input type="password" name="Password" value="" placeholder="New Password"
+                               id="re_password">
+                    </div>
+                    <div>
+                        <input type="button" value="Sign Up" onClick="Submit()"/>
+                    </div>
+                </form>
+    </section>
+</div>
+
+</body>
+<script>
+
+
+    function Submit() {
+        var emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/;
+        var
+                femail = document.form.Email.value,
+                freemail = document.form.enterEmail.value,
+                fpassword = document.form.Password.value;
+
+
+        if (femail == "") {
+            document.form.Email.focus();
+            document.getElementById("errorBox").innerHTML = "enter the email";
+            return false;
+        } else if (!emailRegex.test(femail)) {
+            document.form.Email.focus();
+            document.getElementById("errorBox").innerHTML = "enter the valid email";
+            return false;
+        }
+
+        if (freemail == "") {
+            document.form.enterEmail.focus();
+            document.getElementById("errorBox").innerHTML = "Re-enter the email";
+            return false;
+        } else if (!emailRegex.test(freemail)) {
+            document.form.enterEmail.focus();
+            document.getElementById("errorBox").innerHTML = "Re-enter the valid email";
+            return false;
+        }
+
+        if (freemail != femail) {
+            document.form.enterEmail.focus();
+            document.getElementById("errorBox").innerHTML = "emails are not matching, re-enter again";
+            return false;
+        }
+
+
+        if (fpassword == "") {
+            document.form.Password.focus();
+            document.getElementById("errorBox").innerHTML = "enter the password";
+            return false;
+        }
+
+
+        if (femail != '' && freemail != '' && fpassword != '') {
+            document.getElementById("errorBox").innerHTML = "form submitted successfully";
+        }
+    }
+</script>
+</html>
