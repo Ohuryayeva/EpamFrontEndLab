@@ -2,19 +2,6 @@
 <head>
     <title>Parallax</title>
     <link href="css/paralax.css" rel="stylesheet" type="text/css"/>
-    <script>
-        function login() {
-            var name = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            var hash = window.btoa(name + ":" + password);
-
-            var exp_date = new Date();
-            exp_date.setDate(exp_date.getDate() +1 );
-            var auth = encodeURIComponent("Basic " + hash);
-            document.cookie = "auth=" + auth + ";path=/;expires=" + exp_date.toUTCString();
-            window.location = "design.html";
-        }
-    </script>
 </head>
 <body>
 <div class="pss_main">
@@ -25,7 +12,7 @@
     <div class="pss_slides">
         <ul>
             <li>
-                <img src="http://torreyshannon.com/wp-content/uploads/2013/04/to-do-list.jpg" alt="image01"/>
+                <img src="img/to-do-list.jpg" alt="image01"/>
             </li>
             <li>
                 <div class="container">
@@ -38,7 +25,7 @@
                                 <input type="password" placeholder="Password" required="" id="password" />
                             </div>
                             <div>
-                                <input type="button" value="Log in" onclick="login()" />
+                                <input type="button" value="Log in" onclick="Couch.saveLoginToCookie()" />
                                 <a href="#">First visit?</a>
                             </div>
                         </form>
@@ -48,5 +35,6 @@
         </ul>
     </div>
 </div>
+<script src="js/couch.js"></script>
 </body>
 </html>

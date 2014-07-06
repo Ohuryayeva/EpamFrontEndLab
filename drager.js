@@ -26,7 +26,7 @@ function displayCategory(categoryName, active) {
 
     var newB = document.createElement('div');
     newB.className = "delet";
-    newB.innerHTML = newB.innerHTML + '&#x2718;';
+    newB.innerHTML = newB.innerHTML + 'x';
     newB.setAttribute("onclick", "overlay(" + id + ")")
     newCategory.appendChild(newB);
 
@@ -52,7 +52,6 @@ function displayCategory(categoryName, active) {
         document.getElementById('submit').style.display = "none";
     }
 
-
     var categories_in_form = document.getElementById("sel_cat");
     var new_category = document.createElement("option");
     categories_in_form.appendChild(new_category);
@@ -62,18 +61,21 @@ function displayCategory(categoryName, active) {
 function myFunction() {
     var categoryName = document.getElementById('input').value;
     displayCategory(categoryName, false);
+    updateCategories();
 }
 
 function displayCategories(categories){
     var ul_categories = document.getElementById("category");
+
     for (var i=0; i<categories.length; i++){
+
         if (i == 0){
             displayCategory(categories[i], true);
         } else {
             displayCategory(categories[i], false);
         }
-
     }
+
 }
 
 function onEnter() {
@@ -94,6 +96,7 @@ function delet(num) {
     }
      element.parentNode.removeChild(element);
     exitModalWindow();
+    updateCategories();
 }
 function overlay(id){
 
@@ -109,4 +112,13 @@ document.getElementById('modalWindow').style.visibility="visible";
 function exitModalWindow(){ document.getElementById("modalWindow").style.visibility = 'hidden';
 document.getElementById('box-inner').style.visibility="hidden"; 
 }
-
+function updateCategories(){
+    var li_cat = document.getElementsByClassName("stick");
+    var cat_array =[];
+    for(var i=0; i<li_cat.length;i++){
+        cat_array.push(li_cat[i].getElementsByTagName('h2')[0].innerHTML);
+    }
+    var user = Couch.getUser();
+    user.configuration.categories = cat_array;
+    Couch.updateUser(user);
+}

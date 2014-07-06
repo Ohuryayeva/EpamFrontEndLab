@@ -1,5 +1,6 @@
 const CouchBDHOST = 'http://localhost:5984/';
 //const CouchBDHOST = 'http://epam-tasks-app.iriscouch.com/';
+
 var Couch = {
     db : "",
     auth : "",
@@ -7,8 +8,8 @@ var Couch = {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", CouchBDHOST + this.db +"/", false, 'couch', 'couch');
         var task_id;
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-       // xhr.setRequestHeader("Authorization", this.auth);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); //needs to send data to server
+        xhr.setRequestHeader("Authorization", this.auth);
         xhr.withCredentials = true;
         xhr.onreadystatechange = function () {
             if (xhr.readyState != 4) return; //return if not complete
@@ -24,7 +25,7 @@ var Couch = {
         xhr.send(JSON.stringify(task));
         return task;
     },
-    login : function(){
+    checkLogin : function(){
         var xhr = new XMLHttpRequest();
         var result;
         var auth = this.getAuthCookie();
@@ -113,6 +114,17 @@ var Couch = {
         xhr.setRequestHeader("Authorization", this.auth);
         xhr.send(JSON.stringify());
     },
+    saveLoginToCookie: function() {
+        var name = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var hash = window.btoa(name + ":" + password);
+
+        var exp_date = new Date();
+        exp_date.setDate(exp_date.getDate() +1);
+        var auth = encodeURIComponent("Basic " + hash);// make coding to avoid incorrect requests to the server
+        document.cookie = "auth=" + auth + ";path=/;expires=" + exp_date.toUTCString();
+        window.location = "design.html";
+    },
     getAuthCookie :function (name) {
         var cookies = document.cookie.split(";");
         var auth;
@@ -125,6 +137,42 @@ var Couch = {
     },
     logout : function(){
         document.cookie = "auth=;path=/;expires=-1;";
+        window.location = "paralax.html";
+    },
+    updateUser: function(user){
+        var xhr = new XMLHttpRequest();
+        xhr.open("PUT", CouchBDHOST + "_users/org.couchdb.user:" + Couch.db, false);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");//needs if we send data to server
+        xhr.setRequestHeader("Authorization", this.auth);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState != 4) return; //return if not complete
+
+            if (xhr.status != 201 && xhr.status != 200) { //check request status
+                alert('Error ' + xhr.status + ': ' + xhr.statusText);
+                return;
+            }
+            var dataJson = xhr.responseText;
+            var data = JSON.parse(dataJson);
+        }
+        xhr.send(JSON.stringify(user));
+    },
+    getUser: function(){
+        var xhr = new XMLHttpRequest();
+        var user;
+        xhr.open('GET', CouchBDHOST + "_users/org.couchdb.user:" + Couch.db, false);
+        xhr.setRequestHeader("Authorization", this.auth);
+        xhr.onreadystatechange = function () {
+
+            if (xhr.readyState != 4) return; //return if not complete
+            if (xhr.status != 200) { //check request status
+                alert('Error ' + xhr.status + ': ' + xhr.statusText);
+                return;
+            }
+            var dataJson = xhr.responseText;
+            user = JSON.parse(dataJson);
+        }
+        xhr.send();
+        return user;
     }
 }
 

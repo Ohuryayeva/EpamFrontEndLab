@@ -19,7 +19,7 @@ body {
 }
 
 .pss_contr {
-    background: #27A9F0 url(../images/down.png) no-repeat center center;
+    background: #27A9F0 url(../img/down.png) no-repeat center center;
     cursor: pointer;
     display: none;
     height: 70px;
@@ -40,7 +40,7 @@ body {
 }
 
 .sel_page_1:checked ~ .pss_contr.c2 {
-    background-image: url(../images/up.png);
+    background-image: url(../img/up.png);
     display: block;
     top: 80%;
 }
@@ -156,7 +156,7 @@ form:after {
     box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    background: #F0F0F0 url(http://cssdeck.com/uploads/media/items/8/8bcLQqF.png) no-repeat;
+    background: #F0F0F0 url(../img/form.png) no-repeat;
     border: 1px solid #c8c8c8;
     color: #777;
     font: 13px Helvetica, Arial, sans-serif;

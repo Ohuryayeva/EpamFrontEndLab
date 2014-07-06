@@ -68,10 +68,6 @@ ul .stick {
 		margin-bottom: 10px;
 		margin-top: 10px;
 }
-	
-
-
-
 
 .delet{
 	position: absolute;
@@ -80,6 +76,7 @@ ul .stick {
 	top: 12px;
     display: none;
     position: absolute;
+    font-weight: bold;
 	width:20px;
 	height:20px;
 	-moz-opacity: 0.72;

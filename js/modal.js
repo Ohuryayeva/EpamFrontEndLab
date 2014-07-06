@@ -89,6 +89,8 @@ var Modal = {
             var li_element = e.target.parentNode;
             var id = li_element.getAttribute("id");
             var task = Couch.getTask(id);
+            Time.stopCountdown(id);
+            Time.stopDeadline(id);
             Couch.deleteTask(task);
             li_element.parentNode.removeChild(li_element);
 
@@ -149,8 +151,6 @@ var Modal = {
         input_option.setAttribute("id", check_option);
         input_option.setAttribute("name", check_option);
         input_option.checked = is_checked;
-
-
         input_option.onchange = function () {
             var ul_checkbox = input_option.parentNode.parentNode;
             var li_task = ul_checkbox.parentNode;
