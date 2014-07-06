@@ -136,6 +136,7 @@ h5 .sticky{
     position: absolute;
     bottom: 3px;
     right: 3px;
+    font-size: 1.2em;
 }
 
 p .sticky{
@@ -143,7 +144,7 @@ p .sticky{
     text-decoration: underline;
 
 }
-div.deadline .sticky{
+div.deadline {
     margin: 5px 0;
     font-size: 1.2em;
 }

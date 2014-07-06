@@ -130,7 +130,7 @@ var Modal = {
             sticky_li.appendChild(ul_checkbox);
             for(var i=0; i< task.checkbox.length; i++){
                 var check_option = task.checkbox[i].name;
-                this.displayCheckBox(check_option, ul_checkbox, task.checkbox[i].done);
+                this.displayCheckBox(check_option, ul_checkbox, task.checkbox[i].done, true);
             }
         }
     },
@@ -144,33 +144,35 @@ var Modal = {
         }
 
     },
-    displayCheckBox: function (check_option, ul_checkbox, is_checked) {
+    displayCheckBox: function (check_option, ul_checkbox, is_checked, add_onchange) {
         var li_checkbox = document.createElement("li");
         var input_option = document.createElement("input");
         input_option.setAttribute("type", "checkbox");
         input_option.setAttribute("id", check_option);
         input_option.setAttribute("name", check_option);
         input_option.checked = is_checked;
-        input_option.onchange = function () {
-            var ul_checkbox = input_option.parentNode.parentNode;
-            var li_task = ul_checkbox.parentNode;
-            var task_id = li_task.getAttribute("id");
-            var ul_finished = document.getElementById("finished");
-            var task = Couch.getTask(task_id);
-            var all_checked = true;
-            for (var i = 0; i < ul_checkbox.childNodes.length; i++) {
-                var input = ul_checkbox.childNodes[i].firstChild;
-                task.checkbox[i].done = input.checked;
-                if(task.checkbox[i].done != true){
-                    var all_checked = false;
-                }
+        if (add_onchange == true){
+            input_option.onchange = function () {
+                var ul_checkbox = input_option.parentNode.parentNode;
+                var li_task = ul_checkbox.parentNode;
+                var task_id = li_task.getAttribute("id");
+                var ul_finished = document.getElementById("finished");
+                var task = Couch.getTask(task_id);
+                var all_checked = true;
+                for (var i = 0; i < ul_checkbox.childNodes.length; i++) {
+                    var input = ul_checkbox.childNodes[i].firstChild;
+                    task.checkbox[i].done = input.checked;
+                    if(task.checkbox[i].done != true){
+                        var all_checked = false;
+                    }
 
+                }
+                if (all_checked == true){
+                    ul_finished.appendChild(li_task);
+                    task.status = "finished";
+                }
+                Couch.updateTask(task);
             }
-            if (all_checked == true){
-                ul_finished.appendChild(li_task);
-                task.status = "finished";
-            }
-            Couch.updateTask(task);
         }
 
         var checkbox_label = document.createElement('label');
@@ -187,7 +189,7 @@ var Modal = {
             return;
         }
         else {
-            this.displayCheckBox(check_option, ul_checkbox, false);
+            this.displayCheckBox(check_option, ul_checkbox, false, false);
             document.getElementById("task_checkbox").value = "";
         }
     },
