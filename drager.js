@@ -1,3 +1,32 @@
+function allowDroper(ev) {
+ev.preventDefault();
+}
+
+function drager(ev) {
+
+ev.dataTransfer.setData(" + id + ", ev.target.id);
+}
+
+function droper(ev) {
+var ul_target = ev.target; // write element where we try to push our li
+var li_element;
+if (ul_target.tagName != 'UL' || ul_target.id == "") { // if we didn't get exactly in ul
+li_element = ul_target;
+while (li_element.tagName != 'LI' || li_element.id == "") {
+li_element = li_element.parentElement; // every time go up to find ul element
+}
+ul_target = li_element.parentElement;
+}
+ev.preventDefault();
+var category_id = ev.dataTransfer.getData(" + id + ");
+if (li_element == undefined) {
+ul_target.appendChild(document.getElementById(category_id));
+} else {
+ul_target.insertBefore(document.getElementById(category_id), li_element)
+}
+
+}
+
 function text(){
  document.getElementById('input').style.display = "block";
  document.getElementById('Add').style.display = "none";
