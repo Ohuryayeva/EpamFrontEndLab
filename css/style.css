@@ -203,3 +203,10 @@
         padding: 3px 10px;
     }
 }
+
+#logout{
+    font-size: 1.8em;
+    position: absolute;
+    top:20px;
+    right: 20px;
+}

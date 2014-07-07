@@ -1,5 +1,4 @@
 //const CouchBDHOST = 'http://localhost:5984/';
-//const CouchBDHOST = 'http://epam-tasks-app.iriscouch.com/';
 const CouchBDHOST = 'http://epam.couchappy.com/';
 const adminAuth = "Basic Y291Y2g6Y291Y2g="; // hashed credentials couch:couch
 
