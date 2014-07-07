@@ -164,7 +164,7 @@ var Couch = {
 
             if (xhr.readyState != 4) return; //return if not complete
             if (xhr.status != 200) { //check request status
-                alert('Error ' + xhr.status + ': ' + xhr.statusText);
+               console.log('Error ' + xhr.status + ': ' + xhr.statusText);
                 return;
             }
             var dataJson = xhr.responseText;
