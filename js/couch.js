@@ -14,7 +14,7 @@ var Couch = {
         exp_date.setDate(exp_date.getDate() +1);
         var auth = encodeURIComponent("Basic " + hash);// make coding to avoid incorrect requests to the server
         document.cookie = "auth=" + auth + ";path=/;expires=" + exp_date.toUTCString();// add to cookie credentials
-        window.location = "index.html";
+
     },
     getAuthCookie :function (name) {
         var cookies = document.cookie.split("; ");

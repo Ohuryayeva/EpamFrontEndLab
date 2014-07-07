@@ -18,6 +18,7 @@
                 <div class="container">
                     <section id="content">
                         <form action="">
+                            <div id="errorBox"></div>
                             <div>
                                 <input type="text" placeholder="Username" required="" id="username" />
                             </div>
@@ -25,7 +26,7 @@
                                 <input type="password" placeholder="Password" required="" id="password" />
                             </div>
                             <div>
-                                <input type="button" value="Log in" onclick="Couch.saveLoginToCookie()" />
+                                <input type="button" value="Log in" onclick="login()" />
                                 <a href="registration.html">First visit?</a>
                             </div>
                         </form>
@@ -36,5 +37,16 @@
     </div>
 </div>
 <script src="js/couch.js"></script>
+<script>
+    function login(){
+        Couch.saveLoginToCookie();
+        var login_ok = Couch.checkLogin();
+        if (login_ok == true){
+            window.location = "index.html";
+        } else {
+            document.getElementById('errorBox').innerHTML = "Incorrect login and password";
+        }
+    }
+</script>
 </body>
 </html>
