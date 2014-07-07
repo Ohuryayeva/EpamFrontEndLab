@@ -68,13 +68,8 @@ body {
 .pss_slides ul li {
     height: 100%;
     position: relative;
-    opacity: 0.5;
     -webkit-transition: opacity ease-in 1.0s;
     transition: opacity ease-in 1.0s;
-}
-
-.sel_page_2:checked ~ .pss_slides ul li:last-child {
-    opacity: 1;
 }
 
 .pss_slides ul li img {
