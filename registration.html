@@ -13,14 +13,26 @@
     <section id="content">
 
                 <form action="">
-                    <div id="errorBox"></div>
-                    <div id="email_form">
-                        <input type="text" name="Email" value="" placeholder="Your Email" id="username">
+                   
+                     <div id="errorBox"></div>
+                     <div id="name_form">
+                        <input type="text" name="UserName" value=""  placeholder="Your Name"  id="username">
+                     </div>
+                    
+            
+                    
+                    <div id="password_form">
+                     <input type="password" name="Password" value=""  placeholder="Password" id="password">
                     </div>
-                    <div id="Re_email_form">
-                        <input type="text" name="enterEmail" value="" placeholder="Re-enter Email"
-                               id="password">
-                    </div>
+                    
+                    
+                    
+                     <div id="repassword_form">
+                <input type="password" name="rePassword" value=""  placeholder="Confirm Password"  id="re_password">
+                     </div>
+                            
+                    
+                    
                     <div id="password_form">
                         <input type="password" name="Password" value="" placeholder="New Password"
                                id="re_password">
@@ -82,6 +94,64 @@
         if (femail != '' && freemail != '' && fpassword != '') {
             document.getElementById("errorBox").innerHTML = "form submitted successfully";
         }*/
+        
+        
+        	  
+
+function Submit(){
+ var userRegex = /^[a-z0-9_-]{3,16}$/;
+ var passwordRegex=/^[a-z0-9_-]{6,18}$/;
+ var 
+  fname = document.form.UserName.value,
+  frepassword = document.form.rePassword.value,
+  fpassword = document.form.Password.value;
+
+   
+   if (userRegex == "" )
+ {
+  document.form.UserName.focus();
+  document.getElementById("errorBox").innerHTML = "Enter the name (more than 3 and less than 16)";
+  return false;
+  }else if(!userRegex.test(fname)){
+  document.form.UserName.focus();
+  document.getElementById("errorBox").innerHTML = "Enter the valid name (more than 3 and less than 16)";
+  return false;
+  }
+     
+   
+ if(fpassword == "")
+  {
+   document.form.Password.focus();
+   document.getElementById("errorBox").innerHTML = "Enter the password (more than 6 and less than 18)";
+   return false;
+  }
+  else if(!passwordRegex.test(fpassword)){
+  document.form.UserName.focus();
+  document.getElementById("errorBox").innerHTML = "Enter the valid password (more than 6 and less than 18)";
+  return false;
+  }
+   
+    if(frepassword == "")
+  {
+   document.form.Password.focus();
+   document.getElementById("errorBox").innerHTML = "Enter the password";
+   return false;
+  }
+
+  
+   if(frepassword !=  fpassword){
+   document.form.rePassword.focus();
+   document.getElementById("errorBox").innerHTML = "Password are not matching, re-enter again";
+   return false;
+   }
+   
+  
+  if( fname != '' && fpassword != ''&& frepassword != ''){
+   document.getElementById("errorBox").innerHTML = "Form submitted successfully";
+   }
+     
+}
+        
         Couch.createUser();
     }
 </script>
