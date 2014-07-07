@@ -177,6 +177,11 @@ form:after {
     background-position: 10px -53px !important
 }
 
+
+#re_password {
+    background-position: 10px -53px !important
+}
+
 #content form input[type="button"] {
     background: rgb(254, 231, 154);
     -webkit-border-radius: 10px;
