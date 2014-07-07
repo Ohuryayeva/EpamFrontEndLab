@@ -49,7 +49,7 @@ function displayCategory(categoryName, active) {
 
     newCategory.id = id;
     newCategory.setAttribute("draggable", "true");
-    newCategory.setAttribute("ondragstart", "drag(event)");
+    newCategory.setAttribute("ondragstart", "drager(event)");
     newCategory.setAttribute("tabindex", "" + id + "");
     newCategory.setAttribute('onclick', 'changeCategory(this)');
 
