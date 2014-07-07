@@ -24,7 +24,7 @@ ul_target.appendChild(document.getElementById(category_id));
 } else {
 ul_target.insertBefore(document.getElementById(category_id), li_element)
 }
-
+updateCategories();
 }
 
 function text(){
