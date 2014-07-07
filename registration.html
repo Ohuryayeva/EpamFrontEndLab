@@ -46,7 +46,7 @@
 
 
 
-        function Submit(){
+      var function Submit(){
             var userRegex = /^[a-z0-9_-]{3,16}$/;
             var passwordRegex=/^[a-z0-9_-]{6,18}$/;
             var
@@ -96,12 +96,16 @@
 
             if( fname != '' && fpassword != ''&& frepassword != ''){
                 document.getElementById("errorBox").innerHTML = "Form submitted successfully";
-            }
+          
+		  Couch.createUser();
 
+		  }
+			
+		
         }
 
-        Couch.createUser();
-    }
+       
+    
 </script>
 </body>
 </html>
