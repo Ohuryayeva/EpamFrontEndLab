@@ -50,7 +50,7 @@ ul .stick {
     height: auto;
     position: relative;
     max-width: 15em;
-	margin-top:10px;
+	margin-top:-10px;
 	margin-left:20px;
 	
 	background: rgba(242,242,248,1);
