@@ -1,5 +1,6 @@
-const CouchBDHOST = 'http://localhost:5984/';
+//const CouchBDHOST = 'http://localhost:5984/';
 //const CouchBDHOST = 'http://epam-tasks-app.iriscouch.com/';
+const CouchBDHOST = 'http://epam.couchappy.com/';
 const adminAuth = "Basic Y291Y2g6Y291Y2g="; // hashed credentials couch:couch
 
 var Couch = {
@@ -17,7 +18,7 @@ var Couch = {
         window.location = "index.html";
     },
     getAuthCookie :function (name) {
-        var cookies = document.cookie.split(";");
+        var cookies = document.cookie.split("; ");
         var auth;
         for (var i=0; i < cookies.length; i++){
             if ('auth' == cookies[i].split("=")[0]){
@@ -54,10 +55,9 @@ var Couch = {
     },
     createTask: function(task){
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", CouchBDHOST + this.db +"/", false, 'couch', 'couch');
+        xhr.open("POST", CouchBDHOST + this.db +"/", false);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); //needs to send data to server
         xhr.setRequestHeader("Authorization", this.auth);
-        xhr.withCredentials = true;
         xhr.onreadystatechange = function () {
             if (xhr.readyState != 4) return; //return if not complete
 

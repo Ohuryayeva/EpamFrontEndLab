@@ -136,9 +136,10 @@ h5 .sticky{
     position: absolute;
     bottom: 3px;
     right: 3px;
+}
+h4.time{
     font-size: 1.2em;
 }
-
 p .sticky{
     padding: 5px 0;
     text-decoration: underline;

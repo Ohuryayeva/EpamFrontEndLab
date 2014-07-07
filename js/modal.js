@@ -14,7 +14,17 @@ var Modal = {
             category.style.display = "none";
         }
     },
-
+    addCheckOption: function (){
+        var ul_checkbox = document.getElementById("ulCheckbox");
+        var check_option= document.getElementById("task_checkbox").value;
+        if (TaskValidation.checkCheckOption() !== true){
+            return;
+        }
+        else {
+            this.displayCheckBox(check_option, ul_checkbox, false, false);
+            document.getElementById("task_checkbox").value = "";
+        }
+    },
     delCheckOption:function (){
         var ul_checkbox = document.getElementById("ulCheckbox");
         var input_options = ul_checkbox.getElementsByTagName("input");
@@ -182,17 +192,7 @@ var Modal = {
         checkbox_label.innerHTML = check_option;
         checkbox_label.setAttribute("for", check_option);
     },
-    addCheckOption: function (){
-        var ul_checkbox = document.getElementById("ulCheckbox");
-        var check_option= document.getElementById("task_checkbox").value;
-        if (TaskValidation.checkCheckOption() !== true){
-            return;
-        }
-        else {
-            this.displayCheckBox(check_option, ul_checkbox, false, false);
-            document.getElementById("task_checkbox").value = "";
-        }
-    },
+
     cleanForm: function (){
         document.getElementById("task_name").value ="";
         document.getElementById("task_desc").value ="";
